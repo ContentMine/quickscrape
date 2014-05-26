@@ -1,6 +1,6 @@
 {
   "name": "quickscrape",
-  "description": "Very simple academic journal scraping script",
+  "description": "Very simple headless academic journal scraping script",
   "version": "0.1.0",
   "homepage": "https://github.com/ContentMine/quickscrape",
   "author": {
@@ -27,6 +27,17 @@
   },
   "scripts": {
     "test": "grunt nodeunit"
+  },
+  "dependencies": {
+    "commander": "~2.2.0",
+    "sleep": "~1.1.4",
+    "spooky": "~0.2.4",
+    "jsdom": "~0.10.5",
+    "jsdom-xpath": "git://github.com/fmap/jsdom-xpath.git",
+    "download": "~0.1.17"
+  },
+  "bin": {
+    "quickscrape": "bin/quickscrape.js"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.4",

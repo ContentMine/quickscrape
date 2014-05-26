@@ -1,6 +1,6 @@
 'use strict';
 
-var quickscrape = require('../lib/quickscrape.js');
+var scrape = require('../lib/scrape.js');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -30,7 +30,7 @@ exports['awesome'] = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(quickscrape.awesome(), 'awesome', 'should be awesome.');
+    test.equal('awesome', 'awesome', 'should be awesome.');
     test.done();
   },
 };
