@@ -40,7 +40,7 @@ With apt-get, install dependencies:
 
 `apt-get update && apt-get install nodejs phantomjs`
 
-Install quickscrape
+Install final dependency and quickscrape
 
 `npm install --global casperjs quickscrape`
 
