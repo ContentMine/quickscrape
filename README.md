@@ -4,10 +4,38 @@ Very simple extensible, headless scraping.
 
 `quickscrape` is a simple command-line tool for scraping websites using declarative scraper definitions.
 
-## Getting Started
-Install the module with: `npm install quickscrape`.
-
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
+
+## Installation
+
+### Quick-start
+
+Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [CasperJS](http://casperjs.org/), then install the module with: `npm install --global quickscrape`.
+
+### Not-so-quick-start
+
+#### OSX
+
+With [homebrew], install dependencies:
+
+```
+brew update
+brew install node phantomjs casperjs
+```
+
+Install quickscrape
+
+`npm install --global quickscrape`
+
+#### Debian
+
+With apt-get, install dependencies:
+
+`sudo apt-get install nodejs phantomjs`
+
+Install quickscrape
+
+`npm install --global quickscrape`
 
 ## Documentation
 
@@ -31,8 +59,7 @@ You must provide scraper definitions in the format used in the [ContentMine jour
 
 ## Examples
 
-
-```
+```bash
 // grab some pre-cooked scraper definitions
 git clone git@github.com:ContentMine/journal-scrapers.git
 
