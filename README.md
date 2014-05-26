@@ -22,7 +22,7 @@ Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [Ca
 
 #### OSX
 
-With [homebrew], install dependencies:
+With [Homebrew](http://brew.sh/), install dependencies:
 
 ```
 brew update
