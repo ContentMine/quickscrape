@@ -27,7 +27,8 @@ Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [Ca
 With [Homebrew](http://brew.sh/), install dependencies:
 
 ```
-brew update && brew install node phantomjs casperjs
+brew update && brew install node phantomjs
+brew install casperjs --devel
 ```
 
 Install quickscrape
