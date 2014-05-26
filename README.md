@@ -1,4 +1,4 @@
-# quickscrape [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)](http://travis-ci.org/ContentMine/quickscrape)[![NPM version](https://badge.fury.io/js/quickscrape.svg)](http://badge.fury.io/js/quickscrape)
+# quickscrape [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)](http://travis-ci.org/ContentMine/quickscrape) [![NPM version](https://badge.fury.io/js/quickscrape.svg)](http://badge.fury.io/js/quickscrape)
 
 Very simple extensible, headless scraping.
 
