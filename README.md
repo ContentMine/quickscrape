@@ -39,7 +39,7 @@ Install quickscrape
 
 With apt-get, install dependencies:
 
-`sudo apt-get install nodejs phantomjs`
+`apt-get update && apt-get install nodejs phantomjs`
 
 Install quickscrape
 
