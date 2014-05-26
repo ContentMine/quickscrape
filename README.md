@@ -72,12 +72,12 @@ git clone git@github.com:ContentMine/journal-scrapers.git
 // scrape some journal PDFs
 quickscrape \
   --url https://peerj.com/articles/384 \
-  --scraper journal-scrapers/peerj.json
+  --scraper journal-scrapers/peerj.json \
   --output peerj-384
 
 quickscrape \
   --url http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0098172 \
-  --scraper journal-scrapers/plosone.json
+  --scraper journal-scrapers/plosone.json \
   --output plos-waspfaces
 ```
 
