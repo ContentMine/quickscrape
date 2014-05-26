@@ -2,7 +2,13 @@
 
 Very simple extensible, headless scraping.
 
-`quickscrape` is a simple command-line tool for scraping websites using declarative scraper definitions.
+`quickscrape` is a simple command-line tool for scraping websites using declarative scraper definitions and a headless browser.
+
+This approach has some benefits compared to existing scraping systems:
+- Declarative scraper definitions allows large collections of scrapers to be created with no programming.
+- Scraping through a headless browser allows handing off page rendering complexity to the browser, where it belongs. The scraping software sees nice rendered HTML.
+
+Our headless browsing is done by driving [PhantomJS](http://phantomjs.org/) with [CasperJS](http://casperjs.org/) via a node-bridge with [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS).
 
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
 
@@ -80,7 +86,8 @@ quickscrape \
 We are not yet accepting contributions, if you'd like to help please drop me an email (richard@contentmine.org) and I'll let you know when we're ready for that.
 
 ## Release History
-_(Nothing yet)_
+
+- ***0.1.0*** - initial version with simple one-element scraping
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  
