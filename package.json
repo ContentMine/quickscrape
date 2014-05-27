@@ -1,7 +1,7 @@
 {
   "name": "quickscrape",
   "description": "Very simple headless academic journal scraping script",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/ContentMine/quickscrape",
   "author": {
     "name": "Richard Smith-Unna",
@@ -45,5 +45,9 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt": "~0.4.4"
   },
-  "keywords": ["scraping", "datamining", "contentmining"]
+  "keywords": [
+    "scraping",
+    "datamining",
+    "contentmining"
+  ]
 }
