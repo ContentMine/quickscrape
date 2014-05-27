@@ -37,6 +37,11 @@ fs.readFile(program.scraper, 'utf8', function (err, data) {
   check_run(definition);
  });
 
+var finish = function() {
+  console.log('scraping completed');
+  process.exit(0);
+}
+
 var check_run = function(definition) {
   // check definition
   if (definition.url) {
@@ -58,5 +63,5 @@ var check_run = function(definition) {
   process.chdir(program.output);
 
   // run scraper
-  scrape(program.url, definition.elements);
+  scrape(program.url, definition.elements, finish);
 }
