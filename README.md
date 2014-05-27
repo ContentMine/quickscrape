@@ -1,4 +1,4 @@
-# quickscrape [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)](http://travis-ci.org/ContentMine/quickscrape)[![NPM version](https://badge.fury.io/js/quickscrape.svg)](http://badge.fury.io/js/quickscrape)
+# quickscrape [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)](http://travis-ci.org/ContentMine/quickscrape) [![NPM version](https://badge.fury.io/js/quickscrape.svg)](http://badge.fury.io/js/quickscrape)
 
 Very simple extensible, headless scraping.
 
@@ -9,6 +9,8 @@ This approach has some benefits compared to existing scraping systems:
 - Scraping through a headless browser allows handing off page rendering complexity to the browser, where it belongs. The scraping software sees nice rendered HTML.
 
 Our headless browsing is done by driving [PhantomJS](http://phantomjs.org/) with [CasperJS](http://casperjs.org/) via a node-bridge with [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS).
+
+At the moment, `quickscrape` is limited to scraping a single URL at a time, and expects each XPath to require the `content` tag to be extracted.
 
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
 
@@ -25,8 +27,8 @@ Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [Ca
 With [Homebrew](http://brew.sh/), install dependencies:
 
 ```
-brew update
-brew install node phantomjs casperjs
+brew update && brew install node phantomjs
+brew install casperjs --devel
 ```
 
 Install quickscrape
@@ -37,11 +39,11 @@ Install quickscrape
 
 With apt-get, install dependencies:
 
-`sudo apt-get install nodejs phantomjs`
+`apt-get update && apt-get install nodejs phantomjs`
 
-Install quickscrape
+Install final dependency and quickscrape
 
-`npm install --global quickscrape`
+`npm install --global casperjs quickscrape`
 
 ## Documentation
 
