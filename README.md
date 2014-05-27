@@ -1,6 +1,5 @@
-## quickscrape 
-
----
+quickscrape
+----
 
 [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
 [![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
