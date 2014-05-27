@@ -11,7 +11,7 @@ quickscrape
 [gemnasium]: https://gemnasium.com/ContentMine/quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 
-Very simple extensible, headless scraping.
+A very simple declarative, headless scraping CLI.
 
 `quickscrape` is a simple command-line tool for scraping websites using declarative scraper definitions and a headless browser.
 
