@@ -1,4 +1,16 @@
-# quickscrape [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)](http://travis-ci.org/ContentMine/quickscrape) [![NPM version](https://badge.fury.io/js/quickscrape.svg)](http://badge.fury.io/js/quickscrape)
+quickscrape 
+
+---
+
+[![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
+[![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
+[![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
+
+[npm]: http://badge.fury.io/js/quickscrape
+[travis]: http://travis-ci.org/ContentMine/quickscrape
+[gemnasium]: https://gemnasium.com/ContentMine/quickscrape
+[license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 
 Very simple extensible, headless scraping.
 
