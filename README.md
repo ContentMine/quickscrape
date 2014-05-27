@@ -90,6 +90,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 ## Release History
 
 - ***0.1.0*** - initial version with simple one-element scraping
+- ***0.1.1*** - multiple-member elements; clean exiting; massive speedup
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  
