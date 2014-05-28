@@ -26,7 +26,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt nodeunit"
+    "test": "mocha spec"
   },
   "dependencies": {
     "commander": "~2.2.0",
@@ -40,10 +40,10 @@
     "quickscrape": "bin/quickscrape.js"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt": "~0.4.4"
+    "grunt": "~0.4.4",
+    "coveralls": "~2.10.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "should": "~3.3.2"
   },
   "keywords": [
     "scraping",
