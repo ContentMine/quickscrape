@@ -44,17 +44,23 @@ brew install casperjs --devel
 
 Install quickscrape
 
-`npm install --global quickscrape`
+```
+npm install --global quickscrape
+```
 
 #### Debian
 
 With apt-get, install dependencies:
 
-`apt-get update && apt-get install nodejs phantomjs`
+```
+apt-get update && apt-get install nodejs phantomjs
+```
 
 Install final dependency and quickscrape
 
-`npm install --global casperjs quickscrape`
+```
+npm install --global casperjs quickscrape
+```
 
 ## Documentation
 
@@ -70,7 +76,7 @@ Run `quickscrape --help` from the command line to get help:
     -V, --version         output the version number
     -u, --url <url>       URL to scrape
     -s, --scraper <path>  Path to scraper definition (in JSON format)
-    -o, --output <path>   Where to output results (directory will created if it doesn't exist) [output]
+    -o, --output <path>   Where to output results (directory will created if it doesn't exist)
 
 ```
 
