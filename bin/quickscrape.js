@@ -5,7 +5,7 @@ var fs = require('fs');
 var scrape = require('../lib/scrape.js').scrape;
 
 program
-  .version('0.1.0')
+  .version('0.1.2')
   .option('-u, --url <url>', 'URL to scrape')
   .option('-s, --scraper <path>', 'Path to scraper definition (in JSON format)')
   .option('-o, --output <path>', 'Where to output results (directory will created if it doesn\'t exist', 'output')

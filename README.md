@@ -21,7 +21,7 @@ This approach has some benefits compared to existing scraping systems:
 
 Our headless browsing is done by driving [PhantomJS](http://phantomjs.org/) with [CasperJS](http://casperjs.org/) via a node-bridge with [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS).
 
-At the moment, `quickscrape` is limited to scraping a single URL at a time, and expects each XPath to require the `content` tag to be extracted.
+At the moment, `quickscrape` is limited to scraping a single URL at a time.
 
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
 
@@ -102,6 +102,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 
 - ***0.1.0*** - initial version with simple one-element scraping
 - ***0.1.1*** - multiple-member elements; clean exiting; massive speedup
+- ***0.1.2*** - ability to grab text or HTML content of a selected node via special attributes `text` and `html`
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  
