@@ -16,7 +16,7 @@ program
           'where to output results (directory will created if it doesn\'t exist',
           'output')
   .option('-l, --loglevel <level>',
-          'amount of information to log (quiet, info, warning, error, or debug)',
+          'amount of information to log (quiet, info, data, warning, error, or debug)',
           'info')
   .parse(process.argv);
 
@@ -30,7 +30,7 @@ if (!program.scraper) {
   process.exit(1);
 }
 
-if (['info', 'warning', 'error', 'debug'].indexOf(program.loglevel) == -1) {
+if (['info', 'data', 'warning', 'error', 'debug'].indexOf(program.loglevel) == -1) {
   winston.error('Loglevel must be one of: quiet, info, warning, error, debug');
   process.exit(1);
 }
@@ -43,9 +43,9 @@ log = new (winston.Logger)({
 log.cli();
 
 log.info('quickscrape launched with...');
-log.info('  URL: ' + program.url);
-log.info('  Scraper: ' + program.scraper);
-log.info('  Log level: ' + program.loglevel);
+log.info('- URL: ' + program.url);
+log.info('- Scraper: ' + program.scraper);
+log.info('- Log level: ' + program.loglevel);
 
 // check dependencies are installed
 ['phantomjs', 'casperjs'].forEach(function(x) {
