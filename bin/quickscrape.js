@@ -4,6 +4,7 @@ var program = require('commander');
 var fs = require('fs');
 var scrape = require('../lib/scrape.js').scrape;
 var winston = require('winston');
+var which = require('which').sync;
 
 program
   .version('0.1.2')
@@ -45,6 +46,19 @@ log.info('quickscrape launched with...');
 log.info('  URL: ' + program.url);
 log.info('  Scraper: ' + program.scraper);
 log.info('  Log level: ' + program.loglevel);
+
+// check dependencies are installed
+['phantomjs', 'casperjs'].forEach(function(x) {
+  try {
+    var path = which(x);
+  } catch(e) {
+    var helpurl = 'https://github.com/ContentMine/quickscrape';
+    var msg = 'No' + x + ' installation found.' +
+              'See installation instructions at ' + helpurl;
+    throw new Error(msg);
+  }
+  log.info(x + ' installation found at ' + path);
+});
 
 // load the scraper definition
 fs.readFile(program.scraper, 'utf8', function (err, data) {

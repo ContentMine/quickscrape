@@ -36,7 +36,8 @@
     "jsdom-xpath": "git://github.com/fmap/jsdom-xpath.git",
     "download": "~0.1.17",
     "xpath": "0.0.6",
-    "winston": "~0.7.3"
+    "winston": "~0.7.3",
+    "which": "~1.0.5"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"
