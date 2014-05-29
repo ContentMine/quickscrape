@@ -3,23 +3,36 @@
 var program = require('commander');
 var fs = require('fs');
 var scrape = require('../lib/scrape.js').scrape;
+var winston = require('winston');
 
 program
   .version('0.1.2')
   .option('-u, --url <url>', 'URL to scrape')
   .option('-s, --scraper <path>', 'Path to scraper definition (in JSON format)')
   .option('-o, --output <path>', 'Where to output results (directory will created if it doesn\'t exist', 'output')
+  .option('-l, --loglevel <level>', 'Amount of information to log (quiet, info, warning, error, or debug)')
   .parse(process.argv);
 
 if (!program.url) {
-  console.log('ERROR: You must provide a URL to scrape');
+  winston.error('You must provide a URL to scrape');
   process.exit(1);
 }
 
 if (!program.scraper) {
-  console.log('ERROR: You must provide a scraper definition');
+  winston.error('You must provide a scraper definition');
   process.exit(1);
 }
+
+if (['info', 'warning', 'error', 'debug'].indexOf(program.loglevel) == -1) {
+  winston.error('Loglevel must be one of: quiet, info, warning, error, debug');
+  process.exit(1);
+}
+
+var logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({ level: program.loglevel })
+  ]
+});
 
 console.log('\nquickscrape launched with...\n');
 console.log('  URL: ' + program.url);
