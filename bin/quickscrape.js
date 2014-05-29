@@ -7,10 +7,16 @@ var winston = require('winston');
 
 program
   .version('0.1.2')
-  .option('-u, --url <url>', 'URL to scrape')
-  .option('-s, --scraper <path>', 'Path to scraper definition (in JSON format)')
-  .option('-o, --output <path>', 'Where to output results (directory will created if it doesn\'t exist', 'output')
-  .option('-l, --loglevel <level>', 'Amount of information to log (quiet, info, warning, error, or debug)')
+  .option('-u, --url <url>', 
+          'URL to scrape')
+  .option('-s, --scraper <path>', 
+          'path to scraper definition (in JSON format)')
+  .option('-o, --output <path>', 
+          'where to output results (directory will created if it doesn\'t exist',
+          'output')
+  .option('-l, --loglevel <level>', 
+          'amount of information to log (quiet, info, warning, error, or debug)',
+          'info')
   .parse(process.argv);
 
 if (!program.url) {
@@ -28,45 +34,47 @@ if (['info', 'warning', 'error', 'debug'].indexOf(program.loglevel) == -1) {
   process.exit(1);
 }
 
-var logger = new (winston.Logger)({
+log = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)({ level: program.loglevel })
   ]
 });
+log.cli();
 
 console.log('\nquickscrape launched with...\n');
 console.log('  URL: ' + program.url);
 console.log('  Scraper definition: ' + program.scraper + '\n');
+console.log('  Log level: ' + program.loglevel + '\n');
 
 // load the scraper definition
 fs.readFile(program.scraper, 'utf8', function (err, data) {
   if (err) {
-    console.log('ERROR: failed to load scraper definition');
-    console.log(err);
+    log.error('failed to load scraper definition');
+    log.error(err);
     process.exit(1);
   }
  
   var definition = JSON.parse(data);
-  check_run(definition);
- });
+  check_run(definition, program.loglevel);
+});
 
 var finish = function() {
   console.log('scraping completed');
   process.exit(0);
 }
 
-var check_run = function(definition) {
+var check_run = function(definition, loglevel) {
   // check definition
   if (definition.url) {
     var regex = new RegExp(definition.url, 'i');
     if (program.url.match(regex)) {
-      console.log('definition URL matches');
+      log.info('definition URL matches');
     } else {
-      console.log('ERROR: definition URL does not match target URL');
+      log.error('definition URL does not match target URL');
       process.exit(1);
     }
   } else {
-    console.log('ERROR: scraper definition must specify URL(s)');
+    log.error('scraper definition must specify URL(s)');
   }
 
   // create output directory
@@ -76,5 +84,5 @@ var check_run = function(definition) {
   process.chdir(program.output);
 
   // run scraper
-  scrape(program.url, definition.elements, finish);
+  scrape(program.url, definition.elements, finish, loglevel);
 }
