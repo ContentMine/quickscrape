@@ -7,14 +7,14 @@ var winston = require('winston');
 
 program
   .version('0.1.2')
-  .option('-u, --url <url>', 
+  .option('-u, --url <url>',
           'URL to scrape')
-  .option('-s, --scraper <path>', 
+  .option('-s, --scraper <path>',
           'path to scraper definition (in JSON format)')
-  .option('-o, --output <path>', 
+  .option('-o, --output <path>',
           'where to output results (directory will created if it doesn\'t exist',
           'output')
-  .option('-l, --loglevel <level>', 
+  .option('-l, --loglevel <level>',
           'amount of information to log (quiet, info, warning, error, or debug)',
           'info')
   .parse(process.argv);
@@ -41,10 +41,10 @@ log = new (winston.Logger)({
 });
 log.cli();
 
-console.log('\nquickscrape launched with...\n');
-console.log('  URL: ' + program.url);
-console.log('  Scraper definition: ' + program.scraper + '\n');
-console.log('  Log level: ' + program.loglevel + '\n');
+log.info('quickscrape launched with...');
+log.info('  URL: ' + program.url);
+log.info('  Scraper: ' + program.scraper);
+log.info('  Log level: ' + program.loglevel);
 
 // load the scraper definition
 fs.readFile(program.scraper, 'utf8', function (err, data) {
@@ -53,7 +53,7 @@ fs.readFile(program.scraper, 'utf8', function (err, data) {
     log.error(err);
     process.exit(1);
   }
- 
+
   var definition = JSON.parse(data);
   check_run(definition, program.loglevel);
 });
@@ -76,13 +76,12 @@ var check_run = function(definition, loglevel) {
   } else {
     log.error('scraper definition must specify URL(s)');
   }
-
   // create output directory
   if (!fs.existsSync(program.output)) {
+    log.info('creating output directory: ' + program.output);
     fs.mkdirSync(program.output);
   }
   process.chdir(program.output);
-
   // run scraper
   scrape(program.url, definition.elements, finish, loglevel);
 }
