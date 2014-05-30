@@ -1,3 +1,5 @@
+require("blanket");
+
 var url = require('../lib/url.js');
 var should = require('should');
 

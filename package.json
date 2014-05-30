@@ -37,7 +37,9 @@
     "download": "~0.1.17",
     "xpath": "0.0.6",
     "winston": "~0.7.3",
-    "which": "~1.0.5"
+    "which": "~1.0.5",
+    "mocha-lcov-reporter": "0.0.1",
+    "blanket": "~1.1.6"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"
@@ -46,7 +48,7 @@
     "grunt": "~0.4.4",
     "coveralls": "~2.10.0",
     "mocha-lcov-reporter": "0.0.1",
-    "should": "~3.3.2"
+    "should": "~4.0.0"
   },
   "keywords": [
     "scraping",
