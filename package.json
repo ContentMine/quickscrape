@@ -1,7 +1,7 @@
 {
   "name": "quickscrape",
   "description": "Very simple headless academic journal scraping script",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "homepage": "https://github.com/ContentMine/quickscrape",
   "author": {
     "name": "Richard Smith-Unna",
@@ -34,7 +34,10 @@
     "spooky": "~0.2.4",
     "jsdom": "~0.10.5",
     "jsdom-xpath": "git://github.com/fmap/jsdom-xpath.git",
-    "download": "~0.1.17"
+    "download": "~0.1.17",
+    "xpath": "0.0.6",
+    "winston": "~0.7.3",
+    "which": "~1.0.5"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"
