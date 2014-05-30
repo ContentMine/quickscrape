@@ -5,9 +5,11 @@ quickscrape
 [![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
 [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
+[![Coverage Status](https://img.shields.io/coveralls/ContentMine/quickscrape.svg)](coveralls)
 
 [npm]: http://badge.fury.io/js/quickscrape
 [travis]: http://travis-ci.org/ContentMine/quickscrape
+[coveralls]: https://coveralls.io/r/ContentMine/quickscrape
 [gemnasium]: https://gemnasium.com/ContentMine/quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 
