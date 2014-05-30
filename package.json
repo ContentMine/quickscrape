@@ -26,7 +26,9 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "mocha spec"
+    "test": "node ./test/runner.js",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "commander": "~2.2.0",
@@ -37,9 +39,7 @@
     "download": "~0.1.17",
     "xpath": "0.0.6",
     "winston": "~0.7.3",
-    "which": "~1.0.5",
-    "mocha-lcov-reporter": "0.0.1",
-    "blanket": "~1.1.6"
+    "which": "~1.0.5"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"
@@ -48,7 +48,9 @@
     "grunt": "~0.4.4",
     "coveralls": "~2.10.0",
     "mocha-lcov-reporter": "0.0.1",
-    "should": "~4.0.0"
+    "should": "~4.0.0",
+    "istanbul": "~0.2.10",
+    "mocha": "~1.20.0"
   },
   "keywords": [
     "scraping",
