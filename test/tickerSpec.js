@@ -1,5 +1,3 @@
-require("blanket");
-
 var Ticker = require('../lib/ticker.js');
 var should = require('should');
 

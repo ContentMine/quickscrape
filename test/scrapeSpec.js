@@ -1,5 +1,3 @@
-require("blanket");
-
 var scrape = require('../lib/scrape.js');
 var should = require('should');
 

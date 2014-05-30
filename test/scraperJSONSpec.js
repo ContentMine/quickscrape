@@ -1,5 +1,3 @@
-require("blanket");
-
 var sj = require('../lib/scraperJSON.js');
 var should = require('should');
 
