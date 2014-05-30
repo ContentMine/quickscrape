@@ -13,10 +13,12 @@ program
   .option('-s, --scraper <path>',
           'path to scraper definition (in JSON format)')
   .option('-o, --output <path>',
-          'where to output results (directory will created if it doesn\'t exist',
+          'where to output results ' +
+          '(directory will created if it doesn\'t exist',
           'output')
   .option('-l, --loglevel <level>',
-          'amount of information to log (quiet, info, data, warning, error, or debug)',
+          'amount of information to log ' +
+          '(quiet, info, data, warning, error, or debug)',
           'info')
   .parse(process.argv);
 
@@ -30,7 +32,8 @@ if (!program.scraper) {
   process.exit(1);
 }
 
-if (['info', 'data', 'warning', 'error', 'debug'].indexOf(program.loglevel) == -1) {
+var loglevels = ['info', 'data', 'warning', 'error', 'debug'];
+if (loglevels.indexOf(program.loglevel) == -1) {
   winston.error('Loglevel must be one of: quiet, info, warning, error, debug');
   process.exit(1);
 }
@@ -57,7 +60,7 @@ log.info('- Log level: ' + program.loglevel);
               'See installation instructions at ' + helpurl;
     throw new Error(msg);
   }
-  log.info(x + ' installation found at ' + path);
+  log.debug(x + ' installation found at ' + path);
 });
 
 // load the scraper definition
@@ -72,8 +75,11 @@ fs.readFile(program.scraper, 'utf8', function (err, data) {
   check_run(definition, program.loglevel);
 });
 
+
+// this is the callback we pass to the scraper, so the program
+// can exit when all asyncronous file and download tasks have finished
 var finish = function() {
-  console.log('scraping completed');
+  log.info('all tasks completed');
   process.exit(0);
 }
 
@@ -82,7 +88,7 @@ var check_run = function(definition, loglevel) {
   if (definition.url) {
     var regex = new RegExp(definition.url, 'i');
     if (program.url.match(regex)) {
-      log.info('definition URL matches');
+      log.debug('definition URL matches');
     } else {
       log.error('definition URL does not match target URL');
       process.exit(1);
@@ -92,7 +98,7 @@ var check_run = function(definition, loglevel) {
   }
   // create output directory
   if (!fs.existsSync(program.output)) {
-    log.info('creating output directory: ' + program.output);
+    log.debug('creating output directory: ' + program.output);
     fs.mkdirSync(program.output);
   }
   process.chdir(program.output);
