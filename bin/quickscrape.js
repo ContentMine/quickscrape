@@ -7,7 +7,7 @@ var winston = require('winston');
 var which = require('which').sync;
 
 program
-  .version('0.1.2')
+  .version('0.1.3')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-s, --scraper <path>',
