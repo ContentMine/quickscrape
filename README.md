@@ -319,7 +319,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.1*** - multiple-member elements; clean exiting; massive speedup
 - ***0.1.2*** - ability to grab text or HTML content of a selected node via special attributes `text` and `html`
 - ***0.1.3*** - refactor into modules, full logging suite, much more robust downloading
-  ***0.1.4*** - multiple URL processing, bug fixes, reduce dependency list
+- ***0.1.4*** - multiple URL processing, bug fixes, reduce dependency list
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  
