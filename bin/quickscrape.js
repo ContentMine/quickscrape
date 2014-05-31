@@ -6,10 +6,10 @@ var scrape = require('../lib/scrape.js').scrape;
 var winston = require('winston');
 var which = require('which').sync;
 var scraperJSON = require('../lib/scraperJSON.js');
-
+var path = require('path');
 
 program
-  .version('0.1.3')
+  .version('0.1.4')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
@@ -87,7 +87,7 @@ var loadUrls = function(path) {
 }
 
 urllist = program.url ? [program.url] : loadUrls(program.urllist);
-log.info(urllist.length, 'urls to scrape');
+log.info('urls to scrape:', urllist.length);
 
 // load the scraper definition
 var rawdef = fs.readFileSync(program.scraper, 'utf8');
@@ -100,7 +100,7 @@ scraperJSON.checkDefinition(definition);
 // can exit when all asynchronous file and download tasks have finished
 var finish = function() {
   log.info('all tasks completed');
-  // process.exit(0);
+  process.exit(0);
 }
 
 // create output directory
@@ -115,21 +115,25 @@ tld = process.cwd();
 mintime = 60000 / program.ratelimit;
 lasttime = new Date().getTime();
 
-// synchronously process a URL
-var processUrl = function(url, definition, finish,
-                          loglevel) {
+// asynchronously process a URL
+var processUrl = function(url, definition,
+                          loglevel, cb) {
   log.info('processing URL:', url);
   try {
     // url-specific output dir
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
+    dir = path.join(tld, dir);
     if (!fs.existsSync(dir)) {
         log.debug('creating output directory: ' + dir);
         fs.mkdirSync(dir);
     }
     process.chdir(dir);
     // run scraper
-    scrape(url, definition.elements, finish, loglevel);
-    process.chdir(tld);
+    scrape(url, definition.elements, function() {
+      log.debug('changing back to top-level directory');
+      process.chdir(tld);
+      cb();
+    }, loglevel);
   } catch(e) {
     log.error(e);
     log.error(e.trace);
@@ -142,7 +146,7 @@ var processUrl = function(url, definition, finish,
 var processNext = function(i, definition, finish,
                            loglevel) {
   if (i == urllist.length) {
-    return;
+    finish();
   }
   if (i == 0) {
     var timeleft = 0;
@@ -150,15 +154,16 @@ var processNext = function(i, definition, finish,
     // rate-limit
     var now = new Date().getTime();
     var diff = now - lasttime;
-    lasttime = now;
     var timeleft = Math.max(mintime - diff, 0);
-    log.info('waiting', timeleft/1000, 'seconds before next scrape');
+    log.info('waiting', Math.round(timeleft/1000),
+             'seconds before next scrape');
   }
   var nextUrl = urllist[i];
   setTimeout(function() {
-    processUrl(nextUrl, definition,
-               finish, loglevel);
-    processNext(i + 1, definition, finish, loglevel);
+    processUrl(nextUrl, definition, loglevel, function() {
+      lasttime = new Date().getTime();
+      processNext(i + 1, definition, finish, loglevel);
+    });
   }, timeleft + 1000);
 }
 
