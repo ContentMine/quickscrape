@@ -5,6 +5,8 @@ var fs = require('fs');
 var scrape = require('../lib/scrape.js').scrape;
 var winston = require('winston');
 var which = require('which').sync;
+var scraperJSON = require('../lib/scraperJSON.js');
+
 
 program
   .version('0.1.3')
@@ -85,16 +87,13 @@ var finish = function() {
 
 var check_run = function(definition, loglevel) {
   // check definition
-  if (definition.url) {
-    var regex = new RegExp(definition.url, 'i');
-    if (program.url.match(regex)) {
-      log.debug('definition URL matches');
-    } else {
-      log.error('definition URL does not match target URL');
-      process.exit(1);
-    }
+  scraperJSON.checkDefinition(definition);
+  var regex = new RegExp(definition.url, 'i');
+  if (program.url.match(regex)) {
+    log.debug('definition URL matches');
   } else {
-    log.error('scraper definition must specify URL(s)');
+    log.error('definition URL does not match target URL');
+    process.exit(1);
   }
   // create output directory
   if (!fs.existsSync(program.output)) {
