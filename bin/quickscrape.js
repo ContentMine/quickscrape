@@ -20,7 +20,7 @@ program
           'output')
   .option('-l, --loglevel <level>',
           'amount of information to log ' +
-          '(quiet, info, data, warning, error, or debug)',
+          '(quiet, info*, data, warning, error, or debug)',
           'info')
   .parse(process.argv);
 
@@ -34,18 +34,30 @@ if (!program.scraper) {
   process.exit(1);
 }
 
-var loglevels = ['info', 'data', 'warning', 'error', 'debug'];
+var loglevels = ['quiet', 'info', 'data', 'warning', 'error', 'debug'];
 if (loglevels.indexOf(program.loglevel) == -1) {
-  winston.error('Loglevel must be one of: quiet, info, warning, error, debug');
+  winston.error('Loglevel must be one of: ',
+                'quiet, data, info, warning, error, debug');
   process.exit(1);
 }
 
-log = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({ level: program.loglevel })
-  ]
-});
-log.cli();
+if (program.loglevel != 'quiet') {
+  log = new (winston.Logger)({
+    transports: [
+      new (winston.transports.Console)({ level: program.loglevel })
+    ]
+  });
+  log.cli();
+} else {
+  log = {
+    info: function(){},
+    data: function(){},
+    warning: function(){},
+    error: function(){},
+    debug: function(){}
+  };
+}
+
 
 log.info('quickscrape launched with...');
 log.info('- URL: ' + program.url);
