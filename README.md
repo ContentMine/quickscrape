@@ -98,7 +98,7 @@ quickscrape \
 
 You'll see log messages informing you how the scraping proceeds:
 
-![Single URL log output](screenshot_log_single_url.png)
+![Single URL log output](docs/screenshot_log_single_url.png)
 
 Then in the `output` directory (because we didn't specify a custom output path) there are several files:
 
