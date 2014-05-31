@@ -98,7 +98,7 @@ quickscrape \
 
 You'll see log messages informing you how the scraping proceeds:
 
-![Single URL log output](https://www.dropbox.com/s/cisl5kh1u825i9c/Screenshot%202014-05-31%2019.50.12.png)
+![Single URL log output](screenshot_log_single_url.png)
 
 Then in the `output` directory (because we didn't specify a custom output path) there are several files:
 
@@ -251,7 +251,7 @@ quickscrape \
 
 You'll see output like:
 
-![Multi-URL log output](https://www.dropbox.com/s/qw10vzm4hsdgzo9/Screenshot%202014-05-31%2019.58.22.png)
+![Multi-URL log output](docs/screenshot_log_multiple_url.png)
 
 Notice that `quickscrape` rate-limits itself to 3 scrapes per minute. This is a basic courtesy to the sites you are scraping - you wouldn't block the door of a library, so don't take up more than a reasonable share of a site's bandwidth.
 
