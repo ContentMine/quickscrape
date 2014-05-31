@@ -41,17 +41,31 @@ describe("dom", function() {
 
   describe(".getAttribute()", function() {
 
-    it("should extract standard DOM nodes", function() {
+    it("should extract standard DOM attribute", function() {
       fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
         if (err) throw err;
         var html = dom.render(data).childNodes[1];
-        dom.getAttribute(html, 'xmlns')
-           .should.equal('http://www.w3.org/1999/xhtml');
+        var attr = dom.getAttribute(html, 'xmlns');
+        attr.should.equal('http://www.w3.org/1999/xhtml');
       });
     });
 
-    it("should extract standard DOM nodes", function() {
+    it("should extract special `text` attribute", function() {
+      fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
+        if (err) throw err;
+        var html = dom.render(data);
+        var attr = dom.getAttribute(html, 'text')
+        attr.should.equal('My First Heading My first paragraph.');
+      });
+    });
 
+    it("should extract special `html` attribute", function() {
+      fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
+        if (err) throw err;
+        var html = dom.render(data).childNodes[1];
+        dom.getAttribute(html, 'html')
+           .should.equal(data);
+      });
     });
 
   });
