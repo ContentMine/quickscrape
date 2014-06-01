@@ -59,7 +59,7 @@ sudo npm install --global --unsafe-perms quickscrape
 The dependencies can be somewhat tricky to install manually on Debian/Ubuntu, so we've made [an install script](https://gist.github.com/Blahah/827f183fb30ea5b6d571) that you can run easily:
 
 ```
-curl -sSL http://git.io/MN9b2A | sudo bash
+curl -sSL http://git.io/SRffLQ | sudo bash
 ```
 
 If you'd like to run the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
