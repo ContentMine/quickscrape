@@ -94,7 +94,7 @@ You must provide scraper definitions in ScraperJSON format as used in the [Conte
 First, you'll want to grab some pre-cooked definitions:
 
 ```bash
-git clone git@github.com:ContentMine/journal-scrapers.git
+git clone https://github.com/ContentMine/journal-scrapers.git
 ```
 
 Now just run `quickscrape`:
