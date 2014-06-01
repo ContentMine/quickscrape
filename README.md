@@ -17,36 +17,52 @@ quickscrape
 
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
 
-## Installation
+# Installation
 
-Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [CasperJS](http://casperjs.org/), then install the module with: `npm install --global quickscrape`.
+`quickscrape` itself is very easy to install. Simply:
 
-### Quick-start
-
-#### OSX
-
-With [Homebrew](http://brew.sh/), install dependencies:
-
+```bash
+sudo npm install --global quickscrape
 ```
-brew update && brew install node phantomjs
+
+However, `quickscrape` depends on several other packages:
+
+- [Node.js](http://nodejs.org) enables standalone JavaScript apps.
+- [PhantomJS](http://phantomjs.org) is a headless browser system that renders websites.
+- [CasperJS](http://casperjs.org) is a wrapper around PhantomJS that allows us to do powerful things with it.
+- [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS) is a bridge between Node.js and CasperJS.
+
+If you don't already have these installed, you'll need to follow the instructions for your operating system below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
+
+## OSX
+
+The easiest way to install the dependencies is using a package manager like [Homebrew](http://brew.sh/). Currently only Homebrew is supported.
+
+### Homebrew
+
+```bash
+brew update
+# get Node.js and PhantomJS
+brew install node phantomjs
+# we need the latest development version of CasperJS so we use the --devel flag
 brew install casperjs --devel
 ```
 
-Install quickscrape
+Then you can install `quickscrape`:
 
-```
-npm install --global quickscrape
-```
-
-#### Ubuntu / Debian
-====
-Simply run the command:
-
-```
-curl -sSL http://git.io/MN9b2A | sudo bash
+```bash
+sudo npm install --global --unsafe-perms quickscrape
 ```
 
-If you'd like to inspect the install script and/or the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
+## Debian / Ubuntu
+
+The dependencies can be somewhat tricky to install manually on Debian/Ubuntu, so we've made [an install script](https://gist.github.com/Blahah/827f183fb30ea5b6d571) that you can run easily:
+
+```
+curl -sSL http://git.io/SRffLQ | sudo bash
+```
+
+If you'd like to run the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
 
 ## Documentation
 
