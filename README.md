@@ -38,17 +38,8 @@ Install quickscrape
 npm install --global quickscrape
 ```
 
-<<<<<<< HEAD
 #### Ubuntu / Debian
-=======
-If it fails run 
-```
-sudo npm install --global --unsafe-perm quickscrape
-```
-
-#### Debian
->>>>>>> 69d038184588251cd08e46e717d307a830eacf15
-
+====
 Simply run the command:
 
 ```
