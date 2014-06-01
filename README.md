@@ -19,11 +19,9 @@ quickscrape
 
 ## Installation
 
-### Quick-start
-
 Install [NodeJS](http://nodejs.org/), [PhantomJS](http://phantomjs.org/) and [CasperJS](http://casperjs.org/), then install the module with: `npm install --global quickscrape`.
 
-### Not-so-quick-start
+### Quick-start
 
 #### OSX
 
@@ -40,19 +38,15 @@ Install quickscrape
 npm install --global quickscrape
 ```
 
-#### Debian
+#### Ubuntu / Debian
 
-With apt-get, install dependencies:
-
-```
-apt-get update && apt-get install nodejs phantomjs
-```
-
-Install final dependency and quickscrape
+Simply run the command:
 
 ```
-npm install --global casperjs quickscrape
+curl -sSL http://git.io/MN9b2A | sudo bash
 ```
+
+If you'd like to inspect the install script and/or the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
 
 ## Documentation
 
