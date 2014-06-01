@@ -46,16 +46,12 @@ brew update
 brew install node phantomjs
 # we need the latest development version of CasperJS so we use the --devel flag
 brew install casperjs --devel
-# running npm with sudo makes it confused, but it's necessary to get
-# global access to the installed quickscrape command. This setting
-# prevents npm from crashing during install
-env SUDO_UID= SUDO_USER= npm i
 ```
 
 Then you can install `quickscrape`:
 
 ```bash
-sudo npm install --global quickscrape
+sudo npm install --global --unsafe-perms quickscrape
 ```
 
 ## Debian / Ubuntu
