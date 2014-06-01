@@ -40,6 +40,11 @@ Install quickscrape
 npm install --global quickscrape
 ```
 
+If it fails run 
+```
+sudo npm install --global --unsafe-perm quickscrape
+```
+
 #### Debian
 
 With apt-get, install dependencies:
