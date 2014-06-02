@@ -113,7 +113,7 @@ You'll see log messages informing you how the scraping proceeds:
 Then in the `peerj-384` directory there are several files:
 
 ```
-$ ls output
+$ ls peerj-384
 384           384.pdf       rendered.html results.json
 ```
 
