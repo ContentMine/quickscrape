@@ -59,7 +59,7 @@ sudo npm install --global --unsafe-perms quickscrape
 The dependencies can be somewhat tricky to install manually on Debian/Ubuntu, so we've made [an install script](https://gist.github.com/Blahah/827f183fb30ea5b6d571) that you can run easily:
 
 ```
-curl -sSL http://git.io/SRffLQ | sudo bash
+curl -sSL http://git.io/DAuTPQ | sudo bash
 ```
 
 If you'd like to run the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
@@ -82,6 +82,7 @@ Run `quickscrape --help` from the command line to get help:
     -o, --output <path>     where to output results (directory will be created if it doesn't exist
     -r, --ratelimit <int>   maximum number of scrapes per minute (default 3)
     -l, --loglevel <level>  amount of information to log (silent, verbose, info*, data, warn, error, or debug)
+    --checkdeps             check if dependencies are installed and then exit
 
 ```
 
@@ -331,6 +332,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.3*** - refactor into modules, full logging suite, much more robust downloading
 - ***0.1.4*** - multiple URL processing, bug fixes, reduce dependency list
 - ***0.1.5*** - fix bug in bubbling logs up from PhantomJS
+- ***0.1.6*** - add dependency checking option
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  

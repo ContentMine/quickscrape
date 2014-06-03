@@ -31,6 +31,8 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
+    "phantomjs": "~1.9.7",
+    "casperjs": "~1.1.0",
     "commander": "~2.2.0",
     "spooky": "~0.2.4",
     "jsdom": "~0.10.5",
