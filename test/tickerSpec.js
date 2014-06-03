@@ -1,5 +1,11 @@
 var Ticker = require('../lib/ticker.js');
 var should = require('should');
+log = {
+  info: function(){},
+  warn: function(){},
+  error: function(){},
+  debug: function(){}
+};
 
 describe("Ticker", function() {
 
