@@ -6,12 +6,13 @@ describe("dom", function() {
 
   describe(".render()", function() {
 
-    it("should render a DOM from valid HTML", function() {
+    it("should render a DOM from valid HTML", function(done) {
       fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
         if (err) throw err;
         var doc = dom.render(data);
         doc.should.be.ok;
         doc.childNodes[1].tagName.should.equal('HTML');
+        done();
       });
     });
 
@@ -72,16 +73,35 @@ describe("dom", function() {
 
   describe(".select()", function() {
 
-    it("should select a lone element", function() {
-
+    it("should select a lone element", function(done) {
+      fs.readFile(__dirname + '/data/tiny2.html', function(err, data) {
+        if (err) throw err;
+        var doc = dom.render(data);
+        var sel = dom.select('//input[@name="firstname"]', doc);
+        sel.length.should.be.exactly(1);
+        sel[0]['type'].should.equal('text');
+        done();
+      });
     });
 
-    it("should select multiple elements", function() {
-
+    it("should select multiple elements", function(done) {
+      fs.readFile(__dirname + '/data/tiny2.html', function(err, data) {
+        if (err) throw err;
+        var doc = dom.render(data);
+        var sel = dom.select('//input[@type="text"]', doc);
+        sel.length.should.be.exactly(2);
+        done();
+      });
     });
 
-    it("should fail to select nonexistent elements", function() {
-
+    it("should fail to select nonexistent elements", function(done) {
+      fs.readFile(__dirname + '/data/tiny2.html', function(err, data) {
+        if (err) throw err;
+        var doc = dom.render(data);
+        var sel = dom.select('//input[@class="notreal"]', doc);
+        sel.length.should.be.exactly(0);
+        done();
+      });
     });
 
   });
