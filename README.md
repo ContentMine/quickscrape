@@ -35,7 +35,6 @@ However, `quickscrape` depends on several other packages:
 - [Node.js](http://nodejs.org) enables standalone JavaScript apps.
 - [PhantomJS](http://phantomjs.org) is a headless browser system that renders websites.
 - [CasperJS](http://casperjs.org) is a wrapper around PhantomJS that allows us to do powerful things with it.
-- [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS) is a bridge between Node.js and CasperJS.
 
 If you don't already have these installed, you'll need to follow the instructions for your operating system below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
 
