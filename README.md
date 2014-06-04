@@ -13,7 +13,12 @@ quickscrape
 [gemnasium]: https://gemnasium.com/ContentMine/quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 
-`quickscrape` is a simple command-line tool for scraping websites. Scrapers are defined in JSON - no programming required! And pages are rendered in a headless browser, making it easier to browse like a real user.
+`quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
+
+- it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
+- it is *declarative*: Scrapers are defined in separate JSON files. This mean no programming required! It also means any other software supporting the same format could use the same scraper definitions.
+
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org).
 
 **NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
 
@@ -30,7 +35,6 @@ However, `quickscrape` depends on several other packages:
 - [Node.js](http://nodejs.org) enables standalone JavaScript apps.
 - [PhantomJS](http://phantomjs.org) is a headless browser system that renders websites.
 - [CasperJS](http://casperjs.org) is a wrapper around PhantomJS that allows us to do powerful things with it.
-- [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS) is a bridge between Node.js and CasperJS.
 
 If you don't already have these installed, you'll need to follow the instructions for your operating system below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
 
