@@ -9,9 +9,9 @@ describe("dom", function() {
     it("should render a DOM from valid HTML", function(done) {
       fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
         if (err) throw err;
-        var doc = dom.render(data);
+        var doc = dom.render(data.toString());
         doc.should.be.ok;
-        doc.childNodes[1].tagName.should.equal('HTML');
+        doc.childNodes[0].tagName.should.equal('HTML');
         done();
       });
     });
@@ -40,36 +40,48 @@ describe("dom", function() {
 
   });
 
-  // describe(".getAttribute()", function() {
-  //
-  //   it("should extract standard DOM attribute", function() {
-  //     fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
-  //       if (err) throw err;
-  //       var html = dom.render(data).childNodes[1];
-  //       var attr = dom.getAttribute(html, 'xmlns');
-  //       attr.should.equal('http://www.w3.org/1999/xhtml');
-  //     });
-  //   });
-  //
-  //   it("should extract special `text` attribute", function() {
-  //     fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
-  //       if (err) throw err;
-  //       var html = dom.render(data);
-  //       var attr = dom.getAttribute(html, 'text')
-  //       attr.should.equal('My First Heading My first paragraph.');
-  //     });
-  //   });
-  //
-  //   it("should extract special `html` attribute", function() {
-  //     fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
-  //       if (err) throw err;
-  //       var html = dom.render(data).childNodes[1];
-  //       dom.getAttribute(html, 'html')
-  //          .should.equal(data);
-  //     });
-  //   });
-  //
-  // });
+  describe(".getAttribute()", function() {
+
+    it("should extract standard DOM attribute", function(done) {
+      fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
+        if (err) throw err;
+        var src = data.toString('utf-8');
+        var html = dom.render(src).childNodes[0];
+        var attr = dom.getAttribute(html, 'xmlns');
+        attr.should.equal('http://www.w3.org/1999/xhtml');
+        done();
+      });
+    });
+
+    it("should extract special `text` attribute", function(done) {
+      fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
+        if (err) throw err;
+        var src = data.toString('utf-8');
+        var html = dom.render(src).childNodes[0];
+        var attr = dom.getAttribute(html, 'text');
+        attr = dom.cleanElement(attr);
+        attr.should.equal('My First Heading My first paragraph.');
+        done();
+      });
+    });
+
+    it("should extract special `html` attribute", function(done) {
+      fs.readFile(__dirname + '/data/tiny.html', function(err, data) {
+        if (err) throw err;
+        var src = data.toString('utf-8');
+        var html = dom.render(src).childNodes[0];
+        var attr = dom.getAttribute(html, 'html');
+        // normalise for spaces
+        attr = dom.cleanElement(attr);
+        src = dom.cleanElement(src);
+        // only capture the innerHTML of html tag
+        src = src.match(/(\<body\>.*\<\/body\>)/)[1];
+        attr.should.equal(src);
+        done();
+      });
+    });
+
+  });
 
   describe(".select()", function() {
 
