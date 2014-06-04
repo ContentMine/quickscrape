@@ -71,10 +71,7 @@ describe("scraperJSON", function() {
       for (var i in urls) {
         var url = urls[i].url;
         var def = urls[i].def;
-        console.log(url);
-        console.log(def);
         var result = sj.checkDefinitionUrl(def, url);
-        console.log(result);
         result.should.be.false;
       }
     });
