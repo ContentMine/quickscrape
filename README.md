@@ -70,6 +70,9 @@ curl -sSL http://git.io/DAuTPQ | sudo bash
 
 If you'd like to run the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
 
+NOTE: Some people have found that gist failed half-way through and installed Node.js using app-get, including dependent packages .
+
+
 ## Documentation
 
 Run `quickscrape --help` from the command line to get help:
