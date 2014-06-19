@@ -339,6 +339,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.4*** - multiple URL processing, bug fixes, reduce dependency list
 - ***0.1.5*** - fix bug in bubbling logs up from PhantomJS
 - ***0.1.6*** - add dependency checking option
+- ***0.1.7*** - fix bug where jsdom rendered external resources (#10)
 
 ## License
 Copyright (c) 2014 Richard Smith-Unna  

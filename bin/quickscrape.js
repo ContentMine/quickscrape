@@ -9,7 +9,7 @@ var scraperJSON = require('../lib/scraperJSON.js');
 var path = require('path');
 
 program
-  .version('0.1.6')
+  .version('0.1.7')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
