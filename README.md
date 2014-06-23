@@ -15,6 +15,9 @@ quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 [codeclimate]: https://codeclimate.com/github/ContentMine/quickscrape
 
+
+[![NPM](https://nodei.co/npm/quickscrape.png?downloads=true&stars=true)](https://nodei.co/npm/quickscrape/)
+
 `quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
 
 - it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
