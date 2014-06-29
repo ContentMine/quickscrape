@@ -35,7 +35,7 @@
     "casperjs": "~1.1.0",
     "commander": "~2.2.0",
     "spooky": "~0.2.4",
-    "jsdom": "~0.10.5",
+    "jsdom": "~0.11.0",
     "download": "~0.1.17",
     "xpath": "0.0.6",
     "winston": "~0.7.3",
