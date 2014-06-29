@@ -25,8 +25,6 @@ program
           'amount of information to log ' +
           '(silent, verbose, info*, data, warn, error, or debug)',
           'info')
-  .option('--checkdeps',
-          'check if dependencies are installed and then exit')
   .parse(process.argv);
 
 // set up logging
@@ -44,39 +42,6 @@ log = new (winston.Logger)({
   ]
 });
 log.cli();
-
-// // check dependencies are installed
-// var checkDeps = function(loud) {
-//   errs = 0;
-//   ['phantomjs', 'casperjs'].forEach(function(x) {
-//     try {
-//       var path = which(x);
-//     } catch(e) {
-//       var msg = 'No ' + x + ' installation found.'
-//       log.warn(msg);
-//       errs ++;
-//       return;
-//     }
-//     log.log(loud ? 'info' : 'debug', x + ' installation found at ' + path);
-//   });
-//   if (errs > 0) {
-//     var helpurl = 'https://github.com/ContentMine/quickscrape';
-//     var msg = errs.toString() + " dependencies missing. " +
-//               'See installation instructions at ' + helpurl;
-//     log.error(msg);
-//     process.exit(1);
-//   } else {
-//     var msg = "all dependencies installed :)";
-//     log.info(msg);
-//   }
-// }
-
-// if (program.checkdeps) {
-//   checkDeps(true);
-//   process.exit(0);
-// } else {
-//   checkDeps(false);
-// }
 
 if (!(program.url || program.urllist)) {
   log.error('You must provide a URL or list of URLs to scrape');
