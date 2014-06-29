@@ -2,11 +2,10 @@
 
 var program = require('commander');
 var fs = require('fs');
-var scrape = require('../lib/scrape.js').scrape;
 var winston = require('winston');
 var which = require('which').sync;
-var scraperJSON = require('../lib/scraperJSON.js');
 var path = require('path');
+var thresher = require('thresher');
 
 program
   .version('0.1.7')
@@ -46,38 +45,38 @@ log = new (winston.Logger)({
 });
 log.cli();
 
-// check dependencies are installed
-var checkDeps = function(loud) {
-  errs = 0;
-  ['phantomjs', 'casperjs'].forEach(function(x) {
-    try {
-      var path = which(x);
-    } catch(e) {
-      var msg = 'No ' + x + ' installation found.'
-      log.warn(msg);
-      errs ++;
-      return;
-    }
-    log.log(loud ? 'info' : 'debug', x + ' installation found at ' + path);
-  });
-  if (errs > 0) {
-    var helpurl = 'https://github.com/ContentMine/quickscrape';
-    var msg = errs.toString() + " dependencies missing. " +
-              'See installation instructions at ' + helpurl;
-    log.error(msg);
-    process.exit(1);
-  } else {
-    var msg = "all dependencies installed :)";
-    log.info(msg);
-  }
-}
+// // check dependencies are installed
+// var checkDeps = function(loud) {
+//   errs = 0;
+//   ['phantomjs', 'casperjs'].forEach(function(x) {
+//     try {
+//       var path = which(x);
+//     } catch(e) {
+//       var msg = 'No ' + x + ' installation found.'
+//       log.warn(msg);
+//       errs ++;
+//       return;
+//     }
+//     log.log(loud ? 'info' : 'debug', x + ' installation found at ' + path);
+//   });
+//   if (errs > 0) {
+//     var helpurl = 'https://github.com/ContentMine/quickscrape';
+//     var msg = errs.toString() + " dependencies missing. " +
+//               'See installation instructions at ' + helpurl;
+//     log.error(msg);
+//     process.exit(1);
+//   } else {
+//     var msg = "all dependencies installed :)";
+//     log.info(msg);
+//   }
+// }
 
-if (program.checkdeps) {
-  checkDeps(true);
-  process.exit(0);
-} else {
-  checkDeps(false);
-}
+// if (program.checkdeps) {
+//   checkDeps(true);
+//   process.exit(0);
+// } else {
+//   checkDeps(false);
+// }
 
 if (!(program.url || program.urllist)) {
   log.error('You must provide a URL or list of URLs to scrape');
@@ -117,7 +116,7 @@ var rawdef = fs.readFileSync(program.scraper, 'utf8');
 var definition = JSON.parse(rawdef);
 
 // check definition
-scraperJSON.checkDefinition(definition);
+thresher.scraperJSON.checkDefinition(definition);
 
 // this is the callback we pass to the scraper, so the program
 // can exit when all asynchronous file and download tasks have finished
@@ -152,7 +151,7 @@ var processUrl = function(url, definition,
     }
     process.chdir(dir);
     // run scraper
-    scrape(url, definition.elements, function() {
+    thresher.scrape.scrape(url, definition.elements, function() {
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
