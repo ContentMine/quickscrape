@@ -1,5 +1,20 @@
-quickscrape
-----
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Installation](#installation)
+  - [OSX](#osx)
+  - [Debian](#debian)
+  - [Ubuntu](#ubuntu)
+- [Documentation](#documentation)
+- [Examples](#examples)
+  - [1. Extract data from a single URL with a predefined scraper](#1-extract-data-from-a-single-url-with-a-predefined-scraper)
+  - [2. Scraping a list of URLs](#2-scraping-a-list-of-urls)
+- [Contributing](#contributing)
+- [Release History](#release-history)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
 [![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
@@ -20,60 +35,67 @@ quickscrape
 `quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
 
 - it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
-- it is *declarative*: Scrapers are defined in separate JSON files. This mean no programming required! It also means any other software supporting the same format could use the same scraper definitions.
+- it is *declarative*: Scrapers are defined in separate JSON files. This means no programming required! It also means any other software supporting the same format could use the same scraper definitions.
 
 `quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org).
 
-**NOTE**: This is pre-alpha software. It works for some very specific test-cases and is under active development. Please wait until we're in beta to report issues.
+## Installation
 
-# Installation
-
-`quickscrape` itself is very easy to install. Simply:
+`quickscrape` is very easy to install. Simply:
 
 ```bash
 sudo npm install --global quickscrape
 ```
 
-However, `quickscrape` depends on several other packages:
+However, `quickscrape` depends on [Node.js](http://nodejs.org), a platform which enables standalone JavaScript apps.
 
-- [Node.js](http://nodejs.org) enables standalone JavaScript apps.
-- [PhantomJS](http://phantomjs.org) is a headless browser system that renders websites.
-- [CasperJS](http://casperjs.org) is a wrapper around PhantomJS that allows us to do powerful things with it.
+You'll need to install Node if you don't already have it before you can install quickscrape. Follow the instructions below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
 
-If you don't already have these installed, you'll need to follow the instructions for your operating system below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
+### OSX
 
-## OSX
+The simplest way to install Node.js on OSX is to go to  http://nodejs.org/download/, download and run the Mac OS X Installer.
 
-The easiest way to install the dependencies is using a package manager like [Homebrew](http://brew.sh/). Currently only Homebrew is supported.
-
-### Homebrew
+Alternatively, if you use the excellent [Homebrew](http://brew.sh/) package manager, simply run:
 
 ```bash
 brew update
-# get Node.js and PhantomJS
-brew install node phantomjs
-# we need the latest development version of CasperJS so we use the --devel flag
-brew install casperjs --devel
+brew install node
 ```
 
-Then you can install `quickscrape`:
+Then you can install quickscrape:
 
-```bash
+```
 sudo npm install --global --unsafe-perms quickscrape
 ```
 
-## Debian / Ubuntu
+### Debian
 
-The dependencies can be somewhat tricky to install manually on Debian/Ubuntu, so we've made [an install script](https://gist.github.com/Blahah/827f183fb30ea5b6d571) that you can run easily:
-
+```bash
+sudo apt-get update
+sudo apt-get install -y nodejs nodejs-legacy
+curl --insecure https://www.npmjs.org/install.sh | bash
 ```
-curl -sSL http://git.io/DAuTPQ | sudo bash
+
+Then you can install quickscrape
+
+```bash
+sudo npm install --global quickscrape
 ```
 
-If you'd like to run the steps yourself, see this [gist](https://gist.github.com/Blahah/827f183fb30ea5b6d571).
+### Ubuntu
 
-NOTE: Some people have found that gist failed half-way through and installed Node.js using app-get, including dependent packages .
+```bash
+sudo apt-get install -y software-properties-common python-software-properties
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install -y nodejs
+```
 
+Then you can install quickscrape:
+
+```bash
+sudo npm install --global quickscrape
+```
 
 ## Documentation
 
@@ -345,7 +367,9 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.5*** - fix bug in bubbling logs up from PhantomJS
 - ***0.1.6*** - add dependency checking option
 - ***0.1.7*** - fix bug where jsdom rendered external resources (#10)
+  ***0.2.0*** - core moved out to separate library: [thresher](https://github.com/ContentMine/thresher). PhantomJS and CasperJS binaries now managed through npm to simplify installation.
 
 ## License
-Copyright (c) 2014 Richard Smith-Unna  
+
+Copyright (c) 2014 Shuttleworth Foundation
 Licensed under the MIT license.
