@@ -368,6 +368,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.6*** - add dependency checking option
 - ***0.1.7*** - fix bug where jsdom rendered external resources (#10)
   ***0.2.0*** - core moved out to separate library: [thresher](https://github.com/ContentMine/thresher). PhantomJS and CasperJS binaries now managed through npm to simplify installation.
+  ***0.2.1*** - fix messy metadta
 
 ## License
 

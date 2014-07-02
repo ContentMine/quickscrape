@@ -8,7 +8,7 @@ var path = require('path');
 var thresher = require('thresher');
 
 program
-  .version('0.2.0')
+  .version('0.2.1')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
