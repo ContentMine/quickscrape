@@ -1,4 +1,6 @@
 node_modules
-output
 nom-debug.log
 coverage
+# test output files
+dryrun
+output
