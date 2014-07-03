@@ -1,5 +1,5 @@
 node_modules
-nom-debug.log
+npm-debug.log
 coverage
 # test output files
 dryrun
