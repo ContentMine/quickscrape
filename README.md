@@ -113,7 +113,6 @@ Run `quickscrape --help` from the command line to get help:
     -o, --output <path>     where to output results (directory will be created if it doesn't exist
     -r, --ratelimit <int>   maximum number of scrapes per minute (default 3)
     -l, --loglevel <level>  amount of information to log (silent, verbose, info*, data, warn, error, or debug)
-    --checkdeps             check if dependencies are installed and then exit
 
 ```
 
