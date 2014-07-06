@@ -22,14 +22,12 @@
 [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
 [![Coverage Status](https://img.shields.io/coveralls/ContentMine/quickscrape.svg)][coveralls]
-[![Code Climate](https://codeclimate.com/github/ContentMine/quickscrape.png)][codeclimate]
 
 [npm]: http://badge.fury.io/js/quickscrape
 [travis]: http://travis-ci.org/ContentMine/quickscrape
 [coveralls]: https://coveralls.io/r/ContentMine/quickscrape
 [gemnasium]: https://gemnasium.com/ContentMine/quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
-[codeclimate]: https://codeclimate.com/github/ContentMine/quickscrape
 [downloads]: https://nodei.co/npm/quickscrape
 
 `quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
