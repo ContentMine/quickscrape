@@ -1,7 +1,17 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+# quickscrape [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm] [![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license] [![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads] [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 
+[npm]: http://badge.fury.io/js/quickscrape
+[travis]: http://travis-ci.org/ContentMine/quickscrape
+[coveralls]: https://coveralls.io/r/ContentMine/quickscrape
+[gemnasium]: https://gemnasium.com/ContentMine/quickscrape
+[license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
+[downloads]: https://nodei.co/npm/quickscrape
+
+`quickscrape` is a simple command-line tool for powerful, modern website scraping.
+
+### Table of Contents
+
+- [Description](#description)
 - [Installation](#installation)
   - [OSX](#osx)
   - [Debian](#debian)
@@ -14,29 +24,27 @@
 - [Release History](#release-history)
 - [License](#license)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+### Description
 
-[![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
-[![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
-[![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
-[![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
+`quickscrape` is not like other scraping tools. It is designed to enable large-scale content mining. Here's what makes it different:
 
-[npm]: http://badge.fury.io/js/quickscrape
-[travis]: http://travis-ci.org/ContentMine/quickscrape
-[coveralls]: https://coveralls.io/r/ContentMine/quickscrape
-[gemnasium]: https://gemnasium.com/ContentMine/quickscrape
-[license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
-[downloads]: https://nodei.co/npm/quickscrape
+Websites are rendered in a GUI-less browser ([PhantomJS](http://phantomjs.org) via [CasperJS](http://casperjs.org)). This has some important benefits:
 
-`quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
+- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same one human visitors would see on their screen.
+- User interactions can be simulated. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
+- The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
 
-- it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
-- it is *declarative*: Scrapers are defined in separate JSON files. This means no programming required! It also means any other software supporting the same format could use the same scraper definitions.
+Scrapers are defined in separate JSON files that follow a defined structure. This too has important benefits:
 
-`quickscrape` is being developed to allow the community early access to [thresher](https://github.com/ContentMine/thresher), the technology that will drive [ContentMine](http://contentmine.org).
+- No programming required! Non-programmers can make scrapers using a text editor and a web browser with an element inspector (e.g. Chrome).
+- Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
+- Any other software supporting the same format could use the same scraper definitions.
 
-## Installation
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+
+The software is under rapid development, so please be aware there may be bugs. If you find one, please report it on the [issue tracker](https://github.com/ContentMine/quickscrape/issues).
+
+### Installation
 
 `quickscrape` is very easy to install. Simply:
 
@@ -48,7 +56,7 @@ However, `quickscrape` depends on [Node.js](http://nodejs.org), a platform which
 
 You'll need to install Node if you don't already have it before you can install quickscrape. Follow the instructions below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
 
-### OSX
+#### OSX
 
 The simplest way to install Node.js on OSX is to go to  http://nodejs.org/download/, download and run the Mac OS X Installer.
 
@@ -65,7 +73,7 @@ Then you can install quickscrape:
 sudo npm install --global --unsafe-perms quickscrape
 ```
 
-### Debian
+#### Debian
 
 ```bash
 sudo apt-get update
@@ -79,10 +87,10 @@ Then you can install quickscrape
 sudo npm install --global quickscrape
 ```
 
-### Ubuntu
+#### Ubuntu
 
 ```bash
-sudo apt-get install -y software-properties-common python-software-properties
+sudo apt-get install -y software-properties-common build-essential python-software-properties
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install -y nodejs
@@ -94,7 +102,7 @@ Then you can install quickscrape:
 sudo npm install --global quickscrape
 ```
 
-## Documentation
+### Documentation
 
 Run `quickscrape --help` from the command line to get help:
 
@@ -104,22 +112,23 @@ Run `quickscrape --help` from the command line to get help:
 
   Options:
 
-    -h, --help              output usage information
-    -V, --version           output the version number
-    -u, --url <url>         URL to scrape
-    -r, --urllist <path>    path to file with list of URLs to scrape (one per line)
-    -s, --scraper <path>    path to scraper definition (in JSON format)
-    -o, --output <path>     where to output results (directory will be created if it doesn't exist
-    -r, --ratelimit <int>   maximum number of scrapes per minute (default 3)
-    -l, --loglevel <level>  amount of information to log (silent, verbose, info*, data, warn, error, or debug)
+    -h, --help               output usage information
+    -V, --version            output the version number
+    -u, --url <url>          URL to scrape
+    -r, --urllist <path>     path to file with list of URLs to scrape (one per line)
+    -s, --scraper <path>     path to scraper definition (in JSON format)
+    -d, --scraperdir <path>  path to directory containing scraper definitions (in JSON format)
+    -o, --output <path>      where to output results (directory will be created if it doesn't exist
+    -r, --ratelimit <int>    maximum number of scrapes per minute (default 3)
+    -l, --loglevel <level>   amount of information to log (silent, verbose, info*, data, warn, error, or debug)
 
 ```
 
 You must provide scraper definitions in ScraperJSON format as used in the [ContentMine journal-scrapers](https://github.com/ContentMine/journal-scrapers).
 
-## Examples
+### Examples
 
-### 1. Extract data from a single URL with a predefined scraper
+#### 1. Extract data from a single URL with a predefined scraper
 
 First, you'll want to grab some pre-cooked definitions:
 
@@ -201,7 +210,7 @@ $ ls peerj-384
 ]
 ```
 
-### 2. Scraping a list of URLs
+#### 2. Scraping a list of URLs
 
 You can tell `quickscrape` to process a list of URLs using the same scraper.
 
@@ -349,11 +358,11 @@ output/
 5 directories, 40 files
 ```
 
-## Contributing
+### Contributing
 
 We are not yet accepting contributions, if you'd like to help please drop me an email (richard@contentmine.org) and I'll let you know when we're ready for that.
 
-## Release History
+### Release History
 
 - ***0.1.0*** - initial version with simple one-element scraping
 - ***0.1.1*** - multiple-member elements; clean exiting; massive speedup
@@ -363,10 +372,11 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.1.5*** - fix bug in bubbling logs up from PhantomJS
 - ***0.1.6*** - add dependency checking option
 - ***0.1.7*** - fix bug where jsdom rendered external resources (#10)
-  ***0.2.0*** - core moved out to separate library: [thresher](https://github.com/ContentMine/thresher). PhantomJS and CasperJS binaries now managed through npm to simplify installation.
-  ***0.2.1*** - fix messy metadta
+- ***0.2.0*** - core moved out to separate library: [thresher](https://github.com/ContentMine/thresher). PhantomJS and CasperJS binaries now managed through npm to simplify installation.
+- ***0.2.1*** - fix messy metadata
+- ***0.2.3*** - automatic scraper selection
 
-## License
+### License
 
 Copyright (c) 2014 Shuttleworth Foundation
 Licensed under the MIT license.

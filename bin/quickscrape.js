@@ -9,7 +9,7 @@ var thresher = require('thresher');
 var ScraperBox = thresher.scraperbox;
 
 program
-  .version('0.2.1')
+  .version('0.2.3')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
