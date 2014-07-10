@@ -8,7 +8,7 @@ a scraping command-line tool for the modern web.
 
 quickscrape renders URLs in a GUI-less browser. This has some important benefits:
 
-- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same human visitors would see on their screen.
+- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same one human visitors would see on their screen.
 - User interactions can be simulated with the page. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
 - The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
 
@@ -20,7 +20,7 @@ Scrapers are defined in separate JSON files which follow a defined structure. Th
 - Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
 - Any other software supporting the same format could use the same scraper definitions.
 
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), particular [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
 
 ## Table of Contents
 
