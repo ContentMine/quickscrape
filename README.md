@@ -1,7 +1,4 @@
-quickscrape [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
-[![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
-[![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
-[![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
+# quickscrape [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm][![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license][![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads][![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 -----
 
 [npm]: http://badge.fury.io/js/quickscrape
