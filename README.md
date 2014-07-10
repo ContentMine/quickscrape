@@ -1,29 +1,23 @@
-quickscrape
+quickscrape [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
+[![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
+[![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
+[![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 -----
-a scraping command-line tool for the modern web.
 
-`quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
+[npm]: http://badge.fury.io/js/quickscrape
+[travis]: http://travis-ci.org/ContentMine/quickscrape
+[coveralls]: https://coveralls.io/r/ContentMine/quickscrape
+[gemnasium]: https://gemnasium.com/ContentMine/quickscrape
+[license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
+[downloads]: https://nodei.co/npm/quickscrape
 
-### it is *headless*
-
-quickscrape renders URLs in a GUI-less browser. This has some important benefits:
-
-- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same one human visitors would see on their screen.
-- User interactions can be simulated with the page. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
-- The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
-
-### it is *declarative*
-
-Scrapers are defined in separate JSON files which follow a defined structure. This too has benefits:
-
-- No programming required! Non-programmers can make scrapers using a text editor and a web browser with an element inspector (e.g. Chrome).
-- Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
-- Any other software supporting the same format could use the same scraper definitions.
-
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+`quickscrape` is a simple command-line tool for powerful, modern website scraping.
 
 ## Table of Contents
 
+- [Description](#description)
+  - [quickscrape is *headless*](#quickscrape-is-headless)
+  - [quickscrape is *declarative*](#quickscrape-is-declarative)
 - [Installation](#installation)
   - [OSX](#osx)
   - [Debian](#debian)
@@ -36,18 +30,27 @@ Scrapers are defined in separate JSON files which follow a defined structure. Th
 - [Release History](#release-history)
 - [License](#license)
 
-[![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
-[![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
-[![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
-[![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
+## Description
 
-[npm]: http://badge.fury.io/js/quickscrape
-[travis]: http://travis-ci.org/ContentMine/quickscrape
-[coveralls]: https://coveralls.io/r/ContentMine/quickscrape
-[gemnasium]: https://gemnasium.com/ContentMine/quickscrape
-[license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
-[downloads]: https://nodei.co/npm/quickscrape
+`quickscrape` is not like other scraping tools. Here's why:
+
+### quickscrape is *headless*
+
+quickscrape renders URLs in a GUI-less browser. This has some important benefits:
+
+- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same one human visitors would see on their screen.
+- User interactions can be simulated with the page. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
+- The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
+
+### quickscrape is *declarative*
+
+Scrapers are defined in separate JSON files that follow a defined structure. This too has important benefits:
+
+- No programming required! Non-programmers can make scrapers using a text editor and a web browser with an element inspector (e.g. Chrome).
+- Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
+- Any other software supporting the same format could use the same scraper definitions.
+
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
 
 ## Installation
 
