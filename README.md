@@ -21,7 +21,6 @@
 [![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
 [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
-[![Coverage Status](https://img.shields.io/coveralls/ContentMine/quickscrape.svg)][coveralls]
 
 [npm]: http://badge.fury.io/js/quickscrape
 [travis]: http://travis-ci.org/ContentMine/quickscrape
@@ -35,7 +34,7 @@
 - it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
 - it is *declarative*: Scrapers are defined in separate JSON files. This means no programming required! It also means any other software supporting the same format could use the same scraper definitions.
 
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org).
+`quickscrape` is being developed to allow the community early access to [thresher](https://github.com/ContentMine/thresher), the technology that will drive [ContentMine](http://contentmine.org).
 
 ## Installation
 
