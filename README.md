@@ -375,7 +375,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.2.0*** - core moved out to separate library: [thresher](https://github.com/ContentMine/thresher). PhantomJS and CasperJS binaries now managed through npm to simplify installation.
 - ***0.2.1*** - fix messy metadata
 - ***0.2.3*** - automatic scraper selection
-- ***0.2.4*** - bump thresher dependency for bug fixes
+- ***0.2.4-5*** - bump thresher dependency for bug fixes
 
 ### License
 
