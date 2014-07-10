@@ -1,6 +1,28 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+quickscrape
+-----
+a scraping command-line tool for the modern web.
+
+`quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
+
+### it is *headless*
+
+quickscrape renders URLs in a GUI-less browser. This has some important benefits:
+
+- Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same human visitors would see on their screen.
+- User interactions can be simulated with the page. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
+- The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
+
+### it is *declarative*
+
+Scrapers are defined in separate JSON files which follow a defined structure. This too has benefits:
+
+- No programming required! Non-programmers can make scrapers using a text editor and a web browser with an element inspector (e.g. Chrome).
+- Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
+- Any other software supporting the same format could use the same scraper definitions.
+
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), particular [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+
+## Table of Contents
 
 - [Installation](#installation)
   - [OSX](#osx)
@@ -14,14 +36,11 @@
 - [Release History](#release-history)
 - [License](#license)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 [![NPM version](https://badge.fury.io/js/quickscrape.svg)][npm]
 [![license MIT](http://b.repl.ca/v1/license-MIT-brightgreen.png)][license]
 [![Downloads](http://img.shields.io/npm/dm/quickscrape.svg)][downloads]
 [![Build Status](https://secure.travis-ci.org/ContentMine/quickscrape.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/ContentMine/quickscrape.png)][gemnasium]
-[![Coverage Status](https://img.shields.io/coveralls/ContentMine/quickscrape.svg)][coveralls]
 
 [npm]: http://badge.fury.io/js/quickscrape
 [travis]: http://travis-ci.org/ContentMine/quickscrape
@@ -29,13 +48,6 @@
 [gemnasium]: https://gemnasium.com/ContentMine/quickscrape
 [license]: https://github.com/ContentMine/quickscrape/blob/master/LICENSE-MIT
 [downloads]: https://nodei.co/npm/quickscrape
-
-`quickscrape` is a simple command-line tool for scraping websites. It is unique in that:
-
-- it is *headless*: URLs are rendered in a GUI-less browser, meaning the version of the HTML you scrape is the same one visitors would see on their screen
-- it is *declarative*: Scrapers are defined in separate JSON files. This means no programming required! It also means any other software supporting the same format could use the same scraper definitions.
-
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org).
 
 ## Installation
 
@@ -83,7 +95,7 @@ sudo npm install --global quickscrape
 ### Ubuntu
 
 ```bash
-sudo apt-get install -y software-properties-common python-software-properties
+sudo apt-get install -y software-properties-common build-essential python-software-properties
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install -y nodejs
