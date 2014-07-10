@@ -12,8 +12,6 @@
 ### Table of Contents
 
 - [Description](#description)
-  - [quickscrape is *headless*](#quickscrape-is-headless)
-  - [quickscrape is *declarative*](#quickscrape-is-declarative)
 - [Installation](#installation)
   - [OSX](#osx)
   - [Debian](#debian)
@@ -28,17 +26,13 @@
 
 ### Description
 
-`quickscrape` is not like other scraping tools. Here's why:
+`quickscrape` is not like other scraping tools. It is designed to enable large-scale content mining. Here's what makes it different:
 
-#### quickscrape is *headless*
-
-quickscrape renders URLs in a GUI-less browser. This has some important benefits:
+Websites are rendered in a GUI-less browser ([PhantomJS](http://phantomjs.org) via [CasperJS](http://casperjs.org)). This has some important benefits:
 
 - Many modern websites are only barely specified in their HTML, but are rendered with Javascript after the page is loaded. Headless browsing ensures the version of the HTML you scrape is the same one human visitors would see on their screen.
-- User interactions can be simulated with the page. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
+- User interactions can be simulated. This is useful whenever content is only loaded after interaction, for example when article content is gradually loaded by AJAX during scrolling.
 - The full DOM specification is supported (because the backend is WebKit). This means pages with complex Javascripts that use rare parts of the dom (for example, Facebook) can be rendered, which they cannot in most existing tools.
-
-#### quickscrape is *declarative*
 
 Scrapers are defined in separate JSON files that follow a defined structure. This too has important benefits:
 
@@ -47,6 +41,8 @@ Scrapers are defined in separate JSON files that follow a defined structure. Thi
 - Any other software supporting the same format could use the same scraper definitions.
 
 `quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+
+The software is under rapid development, so please be aware there may be bugs. If you find one, please report it on the [issue tracker](https://github.com/ContentMine/quickscrape/issues).
 
 ### Installation
 
