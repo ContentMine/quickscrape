@@ -40,7 +40,7 @@ Scrapers are defined in separate JSON files that follow a defined structure. Thi
 - Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
 - Any other software supporting the same format could use the same scraper definitions.
 
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/thresher).
 
 The software is under rapid development, so please be aware there may be bugs. If you find one, please report it on the [issue tracker](https://github.com/ContentMine/quickscrape/issues).
 
