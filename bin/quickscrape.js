@@ -6,6 +6,7 @@ var winston = require('winston');
 var which = require('which').sync;
 var path = require('path');
 var thresher = require('thresher');
+var ScraperBox = thresher.scraperbox;
 
 program
   .version('0.2.1')
@@ -15,6 +16,8 @@ program
           'path to file with list of URLs to scrape (one per line)')
   .option('-s, --scraper <path>',
           'path to scraper definition (in JSON format)')
+  .option('-d, --scraperdir <path>',
+          'path to directory containing scraper definitions (in JSON format)')
   .option('-o, --output <path>',
           'where to output results ' +
           '(directory will be created if it doesn\'t exist',
@@ -43,12 +46,17 @@ log = new (winston.Logger)({
 });
 log.cli();
 
+if (program.scraper && program.scraperdir) {
+  log.error('Please use either --scraper or --scraperdir, not both');
+  process.exit(1);
+}
+
 if (!(program.url || program.urllist)) {
   log.error('You must provide a URL or list of URLs to scrape');
   process.exit(1);
 }
 
-if (!program.scraper) {
+if (!(program.scraper || program.scraperdir)) {
   log.error('You must provide a scraper definition');
   process.exit(1);
 }
@@ -59,7 +67,12 @@ if (program.url) {
 } else {
   log.info('- URLs from file: ' + program.urls);
 }
-log.info('- Scraper:', program.scraper);
+if (program.scraper) {
+  log.info('- Scraper:', program.scraper);
+}
+if (program.scraperdir) {
+  log.info('- Scraperdir:', program.scraperdir);
+}
 log.info('- Rate limit:', program.ratelimit, 'per minute');
 log.info('- Log level:', program.loglevel);
 
@@ -76,12 +89,11 @@ var loadUrls = function(path) {
 urllist = program.url ? [program.url] : loadUrls(program.urllist);
 log.info('urls to scrape:', urllist.length);
 
-// load the scraper definition
-var rawdef = fs.readFileSync(program.scraper, 'utf8');
-var definition = JSON.parse(rawdef);
-
-// check definition
-thresher.scraperJSON.checkDefinition(definition);
+// load the scraper definition(s)
+var scrapers = new ScraperBox(program.scraperdir);
+if (program.scraper) {
+  scrapers.addScraper(program.scraper);
+}
 
 // this is the callback we pass to the scraper, so the program
 // can exit when all asynchronous file and download tasks have finished
@@ -103,9 +115,10 @@ mintime = 60000 / program.ratelimit;
 lasttime = new Date().getTime();
 
 // asynchronously process a URL
-var processUrl = function(url, definition,
+var processUrl = function(url, scrapers,
                           loglevel, cb) {
   log.info('processing URL:', url);
+  var definition = scrapers.getScraper(url);
   try {
     // url-specific output dir
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
@@ -130,7 +143,7 @@ var processUrl = function(url, definition,
 // perform a rate-limited loop over the urls using
 // (algorithmically, not actually) recursive
 // setTimeOut callbacks
-var processNext = function(i, definition, finish,
+var processNext = function(i, scrapers, finish,
                            loglevel) {
   if (i == urllist.length) {
     finish();
@@ -147,11 +160,11 @@ var processNext = function(i, definition, finish,
   }
   var nextUrl = urllist[i];
   setTimeout(function() {
-    processUrl(nextUrl, definition, loglevel, function() {
+    processUrl(nextUrl, scrapers, loglevel, function() {
       lasttime = new Date().getTime();
-      processNext(i + 1, definition, finish, loglevel);
+      processNext(i + 1, scrapers, finish, loglevel);
     });
   }, timeleft + 1000);
 }
 
-processNext(0, definition, finish, program.loglevel)
+processNext(0, scrapers, finish, program.loglevel)
