@@ -141,7 +141,7 @@ Now just run `quickscrape`:
 ```bash
 quickscrape \
   --url https://peerj.com/articles/384 \
-  --scraper journal-scrapers/peerj.json \
+  --scraper journal-scrapers/scrapers/peerj.json \
   --output peerj-384
 ```
 
