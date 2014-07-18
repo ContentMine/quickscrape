@@ -84,13 +84,13 @@ curl --insecure https://www.npmjs.org/install.sh | bash
 Then you can install quickscrape
 
 ```bash
-sudo npm install --global quickscrape
+sudo -H npm install --global quickscrape
 ```
 
 #### Ubuntu
 
 ```bash
-sudo apt-get install -y software-properties-common build-essential python-software-properties
+sudo apt-get install -y software-properties-common build-essential python-software-properties libfontconfig1
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install -y nodejs
@@ -99,7 +99,7 @@ sudo apt-get install -y nodejs
 Then you can install quickscrape:
 
 ```bash
-sudo npm install --global quickscrape
+sudo -H npm install --global quickscrape
 ```
 
 ### Documentation
