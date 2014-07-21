@@ -6,10 +6,11 @@ var winston = require('winston');
 var which = require('which').sync;
 var path = require('path');
 var thresher = require('thresher');
+var Thresher = thresher.Thresher;
 var ScraperBox = thresher.scraperbox;
 
 program
-  .version('0.2.5')
+  .version('0.2.6')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
@@ -129,14 +130,16 @@ var processUrl = function(url, scrapers,
     }
     process.chdir(dir);
     // run scraper
-    thresher.scrape.scrape(url, definition.elements, function() {
+    var t = new Thresher();
+    t.scrape(url, definition.elements);
+    t.on('end', function() {
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
-    }, loglevel);
+    });
   } catch(e) {
     log.error(e);
-    log.error(e.trace);
+    log.error(e.stack);
   }
 }
 
