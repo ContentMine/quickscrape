@@ -11,7 +11,7 @@ var ScraperBox = thresher.scraperbox;
 var Thresher = thresher.Thresher;
 
 program
-  .version('0.2.6')
+  .version('0.2.7')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
