@@ -7,6 +7,7 @@ var which = require('which').sync;
 var path = require('path');
 var thresher = require('thresher');
 var ScraperBox = thresher.scraperbox;
+var Thresher = thresher.Thresher;
 
 program
   .version('0.2.4')
@@ -129,7 +130,8 @@ var processUrl = function(url, scrapers,
     }
     process.chdir(dir);
     // run scraper
-    thresher.scrape.scrape(url, definition.elements, function() {
+    var thresh = new Thresher()
+    thresh.scrape(url, definition.elements, true, function() {
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
