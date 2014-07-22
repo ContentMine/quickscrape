@@ -40,7 +40,7 @@ Scrapers are defined in separate JSON files that follow a defined structure. Thi
 - Large collections of scrapers can be maintained to retrieve similar sets of information from different pages. For example: newspapers or academic journals.
 - Any other software supporting the same format could use the same scraper definitions.
 
-`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/journal-scrapers).
+`quickscrape` is being developed to allow the community early access to the technology that will drive [ContentMine](http://contentmine.org), such as [ScraperJSON](https://github.com/ContentMine/journal-scrapers) and our Node.js scraping library [thresher](https://github.com/ContentMine/thresher).
 
 The software is under rapid development, so please be aware there may be bugs. If you find one, please report it on the [issue tracker](https://github.com/ContentMine/quickscrape/issues).
 
@@ -84,13 +84,13 @@ curl --insecure https://www.npmjs.org/install.sh | bash
 Then you can install quickscrape
 
 ```bash
-sudo npm install --global quickscrape
+sudo -H npm install --global quickscrape
 ```
 
 #### Ubuntu
 
 ```bash
-sudo apt-get install -y software-properties-common build-essential python-software-properties
+sudo apt-get install -y software-properties-common build-essential python-software-properties libfontconfig1
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install -y nodejs
@@ -99,7 +99,7 @@ sudo apt-get install -y nodejs
 Then you can install quickscrape:
 
 ```bash
-sudo npm install --global quickscrape
+sudo -H npm install --global quickscrape
 ```
 
 ### Documentation
@@ -141,7 +141,7 @@ Now just run `quickscrape`:
 ```bash
 quickscrape \
   --url https://peerj.com/articles/384 \
-  --scraper journal-scrapers/peerj.json \
+  --scraper journal-scrapers/scrapers/peerj.json \
   --output peerj-384
 ```
 
@@ -376,6 +376,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.2.1*** - fix messy metadata
 - ***0.2.3*** - automatic scraper selection
 - ***0.2.4-5*** - bump thresher dependency for bug fixes
+- ***0.2.6*** - new Thresher API
 
 ### License
 

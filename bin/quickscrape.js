@@ -8,6 +8,7 @@ var path = require('path');
 var thresher = require('thresher');
 var Thresher = thresher.Thresher;
 var ScraperBox = thresher.scraperbox;
+var Thresher = thresher.Thresher;
 
 program
   .version('0.2.6')
@@ -25,6 +26,8 @@ program
           'output')
   .option('-r, --ratelimit <int>',
           'maximum number of scrapes per minute (default 3)', 3)
+  .option('-h --headless',
+          'render all pages in a headless browser')
   .option('-l, --loglevel <level>',
           'amount of information to log ' +
           '(silent, verbose, info*, data, warn, error, or debug)',
@@ -131,7 +134,7 @@ var processUrl = function(url, scrapers,
     process.chdir(dir);
     // run scraper
     var t = new Thresher();
-    t.scrape(url, definition.elements);
+    t.scrape(url, definition.elements, program.headless);
     t.on('end', function() {
       log.debug('changing back to top-level directory');
       process.chdir(tld);
