@@ -7,7 +7,7 @@ var which = require('which').sync;
 var path = require('path');
 var thresher = require('thresher');
 var Thresher = thresher.Thresher;
-var ScraperBox = thresher.scraperbox;
+var ScraperBox = thresher.ScraperBox;
 var Thresher = thresher.Thresher;
 
 program
