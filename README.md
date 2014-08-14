@@ -377,6 +377,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.2.3*** - automatic scraper selection
 - ***0.2.4-5*** - bump thresher dependency for bug fixes
 - ***0.2.6-7*** - new Thresher API
+  ***0.2.8*** - fix Thresher API use
 
 ### License
 
