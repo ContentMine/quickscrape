@@ -122,7 +122,6 @@ lasttime = new Date().getTime();
 var processUrl = function(url, scrapers,
                           loglevel, cb) {
   log.info('processing URL:', url);
-  var definition = scrapers.getScraper(url);
   try {
     // url-specific output dir
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
@@ -133,8 +132,8 @@ var processUrl = function(url, scrapers,
     }
     process.chdir(dir);
     // run scraper
-    var t = new Thresher();
-    t.scrape(url, definition.elements, program.headless);
+    var t = new Thresher(scrapers);
+    t.scrape(url, program.headless);
     t.on('end', function() {
       log.debug('changing back to top-level directory');
       process.chdir(tld);
