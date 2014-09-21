@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var program = require('commander');
 var fs = require('fs');
 var winston = require('winston');
@@ -118,11 +117,26 @@ tld = process.cwd();
 mintime = 60000 / program.ratelimit;
 lasttime = new Date().getTime();
 
+var getLevel = function(event) {
+  if (/\\.error/.test(event)) {
+    return 'error';
+  } else if (/elementCapture/.test(event)) {
+    return 'data';
+  } else if (/elementResults/.test(event)) {
+    return 'debug';
+  }
+  return 'info';
+}
+
+var compose = function(var1, var2) {
+
+}
+
+
 // asynchronously process a URL
 var processUrl = function(url, scrapers,
                           loglevel, cb) {
   log.info('processing URL:', url);
-  try {
     // url-specific output dir
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
     dir = path.join(tld, dir);
@@ -133,16 +147,21 @@ var processUrl = function(url, scrapers,
     process.chdir(dir);
     // run scraper
     var t = new Thresher(scrapers);
-    t.scrape(url, program.headless);
-    t.on('end', function() {
+    t.on('scraper.*', function(var1, var2) {
+      log.log(getLevel(this.event), this.event, var1, var2);
+    });
+    t.on('scraper.renderer.*', function(var1, var2) {
+      log.info(this.event, var1, var2)
+    });
+    t.on('result', function(result, structured) {
+      outfile = 'results.json'
+      log.debug('writing results to file:', outfile)
+      fs.writeFileSync(outfile, structured);
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
     });
-  } catch(e) {
-    log.error(e);
-    log.error(e.stack);
-  }
+    t.scrape(url, program.headless);
 }
 
 // perform a rate-limited loop over the urls using
