@@ -31,10 +31,11 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
+    "chalk": "^0.5.1",
     "commander": "~2.2.0",
-    "winston": "~0.7.3",
+    "thresher": "~0.0.7",
     "which": "~1.0.5",
-    "thresher": "~0.0.7"
+    "winston": "~0.7.3"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"

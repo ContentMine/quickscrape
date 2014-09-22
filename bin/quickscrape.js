@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-var program = require('commander');
-var fs = require('fs');
-var winston = require('winston');
-var which = require('which').sync;
-var path = require('path');
-var thresher = require('thresher');
-var Thresher = thresher.Thresher;
-var ScraperBox = thresher.ScraperBox;
-var Thresher = thresher.Thresher;
+var program = require('commander')
+  , fs = require('fs')
+  , winston = require('winston')
+  , which = require('which').sync
+  , path = require('path')
+  , thresher = require('thresher')
+  , Thresher = thresher.Thresher
+  , ScraperBox = thresher.ScraperBox
+  , ep = require('../lib/eventparse.js')
+  , loglevels = require('../lib/loglevels.js');
 
 program
   .version('0.2.8')
@@ -34,21 +35,26 @@ program
   .parse(process.argv);
 
 // set up logging
-var loglevels = ['silent', 'verbose', 'info', 'data',
-                 'warn', 'error', 'debug'];
-if (loglevels.indexOf(program.loglevel) == -1) {
+var allowedlevels = Object.keys(loglevels.levels);
+if (allowedlevels.indexOf(program.loglevel) == -1) {
   winston.error('Loglevel must be one of: ',
                 'quiet, verbose, data, info, warn, error, debug');
   process.exit(1);
 }
 
 log = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({ level: program.loglevel })
-  ]
+  transports: [new winston.transports.Console({
+    level: program.loglevel,
+    levels: loglevels.levels,
+    colorize: true
+  })],
+  level: program.loglevel,
+  levels: loglevels.levels,
+  colorize: true
 });
-log.cli();
+winston.addColors(loglevels.colors);
 
+// verify arguments
 if (program.scraper && program.scraperdir) {
   log.error('Please use either --scraper or --scraperdir, not both');
   process.exit(1);
@@ -64,6 +70,7 @@ if (!(program.scraper || program.scraperdir)) {
   process.exit(1);
 }
 
+// log options
 log.info('quickscrape launched with...');
 if (program.url) {
   log.info('- URL: ' + program.url);
@@ -117,22 +124,6 @@ tld = process.cwd();
 mintime = 60000 / program.ratelimit;
 lasttime = new Date().getTime();
 
-var getLevel = function(event) {
-  if (/\\.error/.test(event)) {
-    return 'error';
-  } else if (/elementCapture/.test(event)) {
-    return 'data';
-  } else if (/elementResults/.test(event)) {
-    return 'debug';
-  }
-  return 'info';
-}
-
-var compose = function(var1, var2) {
-
-}
-
-
 // asynchronously process a URL
 var processUrl = function(url, scrapers,
                           loglevel, cb) {
@@ -148,7 +139,8 @@ var processUrl = function(url, scrapers,
     // run scraper
     var t = new Thresher(scrapers);
     t.on('scraper.*', function(var1, var2) {
-      log.log(getLevel(this.event), this.event, var1, var2);
+      log.log(ep.getlevel(this.event),
+              ep.compose(this.event, var1, var2));
     });
     t.on('scraper.renderer.*', function(var1, var2) {
       log.info(this.event, var1, var2)
@@ -191,4 +183,5 @@ var processNext = function(i, scrapers, finish,
   }, timeleft + 1000);
 }
 
+// start processing
 processNext(0, scrapers, finish, program.loglevel)
