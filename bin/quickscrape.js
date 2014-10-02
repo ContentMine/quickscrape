@@ -11,7 +11,7 @@ var program = require('commander')
   , loglevels = require('../lib/loglevels.js');
 
 program
-  .version('0.2.8')
+  .version('0.3.1')
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',

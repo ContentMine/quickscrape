@@ -379,6 +379,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.2.6-7*** - new Thresher API
 - ***0.2.8*** - fix Thresher API use
 - ***0.3.0*** - use Thresher 0.1.0 and scraperJSON 0.1.0
+- ***0.3.1*** - update the reported version number left out of last release
 
 ### License
 
