@@ -148,7 +148,7 @@ var processUrl = function(url, scrapers,
     t.on('result', function(result, structured) {
       outfile = 'results.json'
       log.debug('writing results to file:', outfile)
-      fs.writeFileSync(outfile, structured);
+      fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
