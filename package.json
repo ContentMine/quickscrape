@@ -33,7 +33,7 @@
   "dependencies": {
     "chalk": "^0.5.1",
     "commander": "~2.2.0",
-    "thresher": "~0.0.7",
+    "thresher": "0.1.0",
     "which": "~1.0.5",
     "winston": "~0.7.3"
   },
