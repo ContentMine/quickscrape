@@ -35,7 +35,8 @@
     "commander": "~2.2.0",
     "thresher": "0.1.0",
     "which": "~1.0.5",
-    "winston": "~0.7.3"
+    "winston": "~0.7.3",
+    "moment": "~2.9.0"
   },
   "bin": {
     "quickscrape": "bin/quickscrape.js"

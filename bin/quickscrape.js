@@ -8,10 +8,12 @@ var program = require('commander')
   , Thresher = thresher.Thresher
   , ScraperBox = thresher.ScraperBox
   , ep = require('../lib/eventparse.js')
-  , loglevels = require('../lib/loglevels.js');
+  , loglevels = require('../lib/loglevels.js')
+  , outformat = require('../lib/outformat.js');
 
+QSVERSION = '0.3.3';
 program
-  .version('0.3.1')
+  .version(QSVERSION)
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
@@ -32,6 +34,8 @@ program
           'amount of information to log ' +
           '(silent, verbose, info*, data, warn, error, or debug)',
           'info')
+  .option('-f, --outformat <name>',
+          'JSON format to transform results into (currently only bibjson)')
   .parse(process.argv);
 
 // set up logging
@@ -68,6 +72,12 @@ if (!(program.url || program.urllist)) {
 if (!(program.scraper || program.scraperdir)) {
   log.error('You must provide a scraper definition');
   process.exit(1);
+}
+
+if (program.outformat) {
+  if (!program.outformat.toLowerCase() == 'bibjson') {
+    log.error('Outformat ' + program.outformat + ' is not valid.');
+  }
 }
 
 // log options
@@ -132,8 +142,8 @@ var processUrl = function(url, scrapers,
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
     dir = path.join(tld, dir);
     if (!fs.existsSync(dir)) {
-        log.debug('creating output directory: ' + dir);
-        fs.mkdirSync(dir);
+      log.debug('creating output directory: ' + dir);
+      fs.mkdirSync(dir);
     }
     process.chdir(dir);
     // run scraper
@@ -149,6 +159,10 @@ var processUrl = function(url, scrapers,
       outfile = 'results.json'
       log.debug('writing results to file:', outfile)
       fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
+      // write out any extra formats
+      if (program.outformat) {
+        outformat.format(program.outformat, structured);
+      }
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
