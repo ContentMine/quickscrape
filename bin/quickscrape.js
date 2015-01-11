@@ -11,7 +11,7 @@ var program = require('commander')
   , loglevels = require('../lib/loglevels.js')
   , outformat = require('../lib/outformat.js');
 
-QSVERSION = '0.3.5';
+QSVERSION = '0.3.6';
 program
   .version(QSVERSION)
   .option('-u, --url <url>',
