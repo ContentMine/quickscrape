@@ -1,17 +1,19 @@
 #!/usr/bin/env node
+var program = require('commander')
+  , fs = require('fs')
+  , winston = require('winston')
+  , which = require('which').sync
+  , path = require('path')
+  , thresher = require('thresher')
+  , Thresher = thresher.Thresher
+  , ScraperBox = thresher.ScraperBox
+  , ep = require('../lib/eventparse.js')
+  , loglevels = require('../lib/loglevels.js')
+  , outformat = require('../lib/outformat.js');
 
-var program = require('commander');
-var fs = require('fs');
-var winston = require('winston');
-var which = require('which').sync;
-var path = require('path');
-var thresher = require('thresher');
-var Thresher = thresher.Thresher;
-var ScraperBox = thresher.scraperbox;
-var Thresher = thresher.Thresher;
-
+QSVERSION = '0.3.6';
 program
-  .version('0.2.7')
+  .version(QSVERSION)
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
@@ -32,24 +34,31 @@ program
           'amount of information to log ' +
           '(silent, verbose, info*, data, warn, error, or debug)',
           'info')
+  .option('-f, --outformat <name>',
+          'JSON format to transform results into (currently only bibjson)')
   .parse(process.argv);
 
 // set up logging
-var loglevels = ['silent', 'verbose', 'info', 'data',
-                 'warn', 'error', 'debug'];
-if (loglevels.indexOf(program.loglevel) == -1) {
+var allowedlevels = Object.keys(loglevels.levels);
+if (allowedlevels.indexOf(program.loglevel) == -1) {
   winston.error('Loglevel must be one of: ',
                 'quiet, verbose, data, info, warn, error, debug');
   process.exit(1);
 }
 
 log = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({ level: program.loglevel })
-  ]
+  transports: [new winston.transports.Console({
+    level: program.loglevel,
+    levels: loglevels.levels,
+    colorize: true
+  })],
+  level: program.loglevel,
+  levels: loglevels.levels,
+  colorize: true
 });
-log.cli();
+winston.addColors(loglevels.colors);
 
+// verify arguments
 if (program.scraper && program.scraperdir) {
   log.error('Please use either --scraper or --scraperdir, not both');
   process.exit(1);
@@ -65,6 +74,13 @@ if (!(program.scraper || program.scraperdir)) {
   process.exit(1);
 }
 
+if (program.outformat) {
+  if (!program.outformat.toLowerCase() == 'bibjson') {
+    log.error('Outformat ' + program.outformat + ' is not valid.');
+  }
+}
+
+// log options
 log.info('quickscrape launched with...');
 if (program.url) {
   log.info('- URL: ' + program.url);
@@ -122,28 +138,36 @@ lasttime = new Date().getTime();
 var processUrl = function(url, scrapers,
                           loglevel, cb) {
   log.info('processing URL:', url);
-  var definition = scrapers.getScraper(url);
-  try {
     // url-specific output dir
     var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
     dir = path.join(tld, dir);
     if (!fs.existsSync(dir)) {
-        log.debug('creating output directory: ' + dir);
-        fs.mkdirSync(dir);
+      log.debug('creating output directory: ' + dir);
+      fs.mkdirSync(dir);
     }
     process.chdir(dir);
     // run scraper
-    var t = new Thresher();
-    t.scrape(url, definition.elements, program.headless);
-    t.on('end', function() {
+    var t = new Thresher(scrapers);
+    t.on('scraper.*', function(var1, var2) {
+      log.log(ep.getlevel(this.event),
+              ep.compose(this.event, var1, var2));
+    });
+    t.on('scraper.renderer.*', function(var1, var2) {
+      log.info(this.event, var1, var2)
+    });
+    t.on('result', function(result, structured) {
+      outfile = 'results.json'
+      log.debug('writing results to file:', outfile)
+      fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
+      // write out any extra formats
+      if (program.outformat) {
+        outformat.format(program.outformat, structured);
+      }
       log.debug('changing back to top-level directory');
       process.chdir(tld);
       cb();
     });
-  } catch(e) {
-    log.error(e);
-    log.error(e.stack);
-  }
+    t.scrape(url, program.headless);
 }
 
 // perform a rate-limited loop over the urls using
@@ -173,4 +197,5 @@ var processNext = function(i, scrapers, finish,
   }, timeleft + 1000);
 }
 
+// start processing
 processNext(0, scrapers, finish, program.loglevel)
