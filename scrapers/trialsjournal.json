@@ -1,0 +1,90 @@
+{
+"url": "www\\.trialsjournal\\.com",
+"elements": {
+"publisher": {
+"selector": "//meta[@name='citation_publisher']",
+"attribute": "content"
+},
+"journal": {
+"selector": "//meta[@name='citation_journal_title']",
+"attribute": "content"
+},
+"title": {
+"selector": "//meta[@name='citation_title']",
+"attribute": "content"
+},
+"authors": {
+"selector": "//meta[@name='citation_author']",
+"attribute": "content"
+},
+"date": {
+"selector": "//meta[@name='citation_date']",
+"attribute": "content"
+},
+"doi": {
+"selector": "//meta[@name='citation_doi']",
+"attribute": "content"
+},
+"volume": {
+"selector": "//meta[@name='citation_volume']",
+"attribute": "content"
+},
+"issue": {
+"selector": "//meta[@name='citation_issue']",
+"attribute": "content"
+},
+"firstpage": {
+"selector": "//meta[@name='citation_firstpage']",
+"attribute": "content"
+},
+"description": {
+"selector": "//meta[@name='description']",
+"attribute": "content"
+},
+"abstract": {
+"selector": "//meta[@name='description']",
+"attribute": "content"
+},
+"fulltext_html": {
+"selector": "//meta[@name='citation_fulltext_html_url']",
+"attribute": "content",
+"download": {
+"rename": "fulltext.html"
+}
+},
+"fulltext_pdf": {
+"selector": "//meta[@name='citation_pdf_url']",
+"attribute": "content",
+"download": {
+"rename": "fulltext.pdf"
+}
+},
+"fulltext_xml": {
+"selector": "//a[.='Download XML']",
+"attribute": "href",
+"download": {
+"rename": "fulltext.xml"
+}
+},
+"supplementary_material": {
+"selector": "//link[starts-with(@title,'Additional file')]",
+"attribute": "href",
+"download": true
+},
+"figure": {
+"selector": "//div[@class='fig']/p/a/img",
+"attribute": "src",
+"download": true
+},
+"figure_caption": {
+"selector": "//div[@class='fig']//strong"
+},
+"license": {
+"selector": "//p[a/@href='http://creativecommons.org/licenses/by/4.0']"
+},
+"copyright": {
+"selector": "//p[contains(.,'licensee')]"
+}
+}
+}
+
