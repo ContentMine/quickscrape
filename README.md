@@ -69,7 +69,7 @@ brew install node
 Then you can install quickscrape:
 
 ```
-sudo npm install --global --unsafe-perms quickscrape
+sudo npm install --global quickscrape
 ```
 
 #### Debian
