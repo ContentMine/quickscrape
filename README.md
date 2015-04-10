@@ -69,7 +69,7 @@ brew install node
 Then you can install quickscrape:
 
 ```
-sudo npm install --global --unsafe-perms quickscrape
+sudo npm install --global quickscrape
 ```
 
 #### Debian
@@ -163,7 +163,7 @@ peerj-384/
     └── results.json
 ```
 
-- `fulltext.html` is the fulltext HTML (as in the case of PeerJ, there's no file extension)
+- `fulltext.html` is the fulltext HTML (duh!)
 - `results.json` is a JSON file containing all the captured data
 - `bib.json` is a JSON file containing the results in bibJSON format
 - `fig-1-full.png` is the downloaded image from the only figure in the paper
@@ -265,7 +265,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.3.0*** - use Thresher 0.1.0 and scraperJSON 0.1.0
 - ***0.3.1*** - update the reported version number left out of last release
 - ***0.3.2*** - fix dependencies
-  ***0.3.3-6*** - bug fixes
+- ***0.3.3-6*** - bug fixes
 
 ### License
 
