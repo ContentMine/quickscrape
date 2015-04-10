@@ -266,6 +266,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.3.1*** - update the reported version number left out of last release
 - ***0.3.2*** - fix dependencies
 - ***0.3.3-6*** - bug fixes
+- ***0.3.7*** - fix bug in bibJSON dates. Bump to thresher 0.1.3.
 
 ### License
 
