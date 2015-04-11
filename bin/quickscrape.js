@@ -155,7 +155,7 @@ var processUrl = function(url, scrapers,
     t.on('scraper.renderer.*', function(var1, var2) {
       log.info(this.event, var1, var2)
     });
-    t.on('result', function(result, structured) {
+    t.once('result', function(result, structured) {
       outfile = 'results.json'
       log.debug('writing results to file:', outfile)
       fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
@@ -165,6 +165,11 @@ var processUrl = function(url, scrapers,
       }
       log.debug('changing back to top-level directory');
       process.chdir(tld);
+
+      // if we don't remove all the listeners, processing more URLs
+      // will post messages  to all the listeners from previous URLs
+      t.removeAllListeners();
+
       cb();
     });
     t.scrape(url, program.headless);
