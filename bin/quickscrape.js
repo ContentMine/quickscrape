@@ -38,6 +38,10 @@ program
           'JSON format to transform results into (currently only bibjson)')
   .parse(process.argv);
 
+if (!process.argv.slice(2).length) {
+  program.help();
+}
+
 // set up logging
 var allowedlevels = Object.keys(loglevels.levels);
 if (allowedlevels.indexOf(program.loglevel) == -1) {
