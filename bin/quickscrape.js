@@ -103,6 +103,8 @@ var loadUrls = function(path) {
   });
   return list.split('\n').map(function(cv) {
     return cv.trim();
+  }).filter(function(x) {
+    return x.length > 0;
   });
 }
 
