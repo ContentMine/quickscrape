@@ -48,57 +48,35 @@ The software is under rapid development, so please be aware there may be bugs. I
 `quickscrape` is very easy to install. Simply:
 
 ```bash
-sudo npm install --global quickscrape
+npm install --global quickscrape
 ```
 
 However, `quickscrape` depends on [Node.js](http://nodejs.org), a platform which enables standalone JavaScript apps.
 
-You'll need to install Node if you don't already have it before you can install quickscrape. Follow the instructions below. Currently we only support OSX and Debian/Ubuntu Linux. If you need instructions for another operating system please [create an issue](https://github.com/ContentMine/quickscrape/issues).
+You'll need to install Node if you don't already have it before you can install quickscrape. The easiest way to do this on Unix systems (e.g. Linux, OSX) is to use NVM.
 
-#### OSX
-
-The simplest way to install Node.js on OSX is to go to  http://nodejs.org/download/, download and run the Mac OS X Installer.
-
-Alternatively, if you use the excellent [Homebrew](http://brew.sh/) package manager, simply run:
+First, install NVM:
 
 ```bash
-brew update
-brew install node
+curl https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
 ```
 
-Then you can install quickscrape:
-
-```
-sudo npm install --global quickscrape
-```
-
-#### Debian
+or, if you don't have curl:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y nodejs nodejs-legacy
-curl --insecure https://www.npmjs.org/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
 ```
 
-Then you can install quickscrape
+**NB: on OSX, you will need to have the developer tools installed (e.g. by installing XCode).**
+
+Then, install the latest node.js, and quickscrape:
 
 ```bash
-sudo -H npm install --global quickscrape
-```
-
-#### Ubuntu
-
-```bash
-sudo apt-get install -y software-properties-common build-essential python-software-properties libfontconfig1
-sudo add-apt-repository -y ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install -y nodejs
-```
-
-Then you can install quickscrape:
-
-```bash
-sudo -H npm install --global quickscrape
+source ~/.nvm/nvm.sh
+nvm install 0.10
+nvm alias default 0.10
+nvm use default
+npm install --global quickscrape
 ```
 
 ### Documentation
