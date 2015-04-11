@@ -11,9 +11,10 @@ var program = require('commander')
   , loglevels = require('../lib/loglevels.js')
   , outformat = require('../lib/outformat.js');
 
-QSVERSION = '0.4.1';
+var pjson = require('../package.json');
+
 program
-  .version(QSVERSION)
+  .version(pjson.version)
   .option('-u, --url <url>',
           'URL to scrape')
   .option('-r, --urllist <path>',
