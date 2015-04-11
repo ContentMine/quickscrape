@@ -267,6 +267,7 @@ We are not yet accepting contributions, if you'd like to help please drop me an 
 - ***0.3.2*** - fix dependencies
 - ***0.3.3-6*** - bug fixes
 - ***0.3.7*** - fix bug in bibJSON dates. Bump to thresher 0.1.3.
+- ***0.4.0*** - fix various bugs (with urllists, tokenized urls), print help when run with no args, update all dependencies.
 
 ### License
 
