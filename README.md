@@ -13,9 +13,6 @@
 
 - [Description](#description)
 - [Installation](#installation)
-  - [OSX](#osx)
-  - [Debian](#debian)
-  - [Ubuntu](#ubuntu)
 - [Documentation](#documentation)
 - [Examples](#examples)
   - [1. Extract data from a single URL with a predefined scraper](#1-extract-data-from-a-single-url-with-a-predefined-scraper)
