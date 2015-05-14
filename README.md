@@ -13,9 +13,6 @@
 
 - [Description](#description)
 - [Installation](#installation)
-  - [OSX](#osx)
-  - [Debian](#debian)
-  - [Ubuntu](#ubuntu)
 - [Documentation](#documentation)
 - [Examples](#examples)
   - [1. Extract data from a single URL with a predefined scraper](#1-extract-data-from-a-single-url-with-a-predefined-scraper)
@@ -45,15 +42,9 @@ The software is under rapid development, so please be aware there may be bugs. I
 
 ### Installation
 
-`quickscrape` is very easy to install. Simply:
+#### Prerequisites
 
-```bash
-npm install --global quickscrape
-```
-
-However, `quickscrape` depends on [Node.js](http://nodejs.org), a platform which enables standalone JavaScript apps.
-
-You'll need to install Node if you don't already have it before you can install quickscrape. The easiest way to do this on Unix systems (e.g. Linux, OSX) is to use NVM.
+You'll need [Node.js](http://nodejs.org) (`node`), a platform which enables standalone JavaScript apps. You'll also need the Node package manager (`npm`), which usually comes with Node.js. Installing Node.js via the operating system's package manager leads to issues. If you already have Node.js installed, and it requires `sudo` to install node packages, that's the wrong way. The easiest way to do it right on Unix systems (e.g. Linux, OSX) is to use NVM, the Node version manager.
 
 First, install NVM:
 
@@ -61,7 +52,7 @@ First, install NVM:
 curl https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
 ```
 
-or, if you don't have curl:
+or, if you don't have `curl`:
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
@@ -69,13 +60,29 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | 
 
 **NB: on OSX, you will need to have the developer tools installed (e.g. by installing XCode).**
 
-Then, install the latest node.js, and quickscrape:
+Then, install the latest Node.js, which will automatically install the latest `npm` as well, and set that version as the default:
 
 ```bash
 source ~/.nvm/nvm.sh
 nvm install 0.10
 nvm alias default 0.10
 nvm use default
+```
+
+Now you should have `node` and `npm` available. Check by running:
+
+```
+node -v
+npm -v
+```
+
+If both of those printed version numbers, you're ready to move on to installing `quickscrape`.
+
+#### Quickscrape
+
+`quickscrape` is very easy to install. Simply:
+
+```bash
 npm install --global quickscrape
 ```
 
