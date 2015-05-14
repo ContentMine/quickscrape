@@ -12,6 +12,7 @@ var program = require('commander')
   , outformat = require('../lib/outformat.js');
 
 var pjson = require('../package.json');
+QSVERSION =  pjson.version;
 
 program
   .version(pjson.version)
