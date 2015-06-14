@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 var program = require('commander')
   , fs = require('fs')
   , winston = require('winston')
@@ -10,6 +11,7 @@ var program = require('commander')
   , ep = require('../lib/eventparse.js')
   , loglevels = require('../lib/loglevels.js')
   , outformat = require('../lib/outformat.js');
+
 
 var pjson = require('../package.json');
 QSVERSION =  pjson.version;
@@ -94,9 +96,11 @@ if (program.url) {
   log.info('- URLs from file: ' + program.urls);
 }
 if (program.scraper) {
+  program.scraper = path.resolve(program.scraper);
   log.info('- Scraper:', program.scraper);
 }
 if (program.scraperdir) {
+  program.scraperdir = path.resolve(program.scraperdir);
   log.info('- Scraperdir:', program.scraperdir);
 }
 log.info('- Rate limit:', program.ratelimit, 'per minute');
@@ -117,12 +121,6 @@ var loadUrls = function(path) {
 urllist = program.url ? [program.url] : loadUrls(program.urllist);
 log.info('urls to scrape:', urllist.length);
 
-// load the scraper definition(s)
-var scrapers = new ScraperBox(program.scraperdir);
-if (program.scraper) {
-  scrapers.addScraper(program.scraper);
-}
-
 // this is the callback we pass to the scraper, so the program
 // can exit when all asynchronous file and download tasks have finished
 var finish = function() {
@@ -142,73 +140,92 @@ tld = process.cwd();
 mintime = 60000 / program.ratelimit;
 lasttime = new Date().getTime();
 
-// asynchronously process a URL
-var processUrl = function(url, scrapers,
-                          loglevel, cb) {
-  log.info('processing URL:', url);
-    // url-specific output dir
-    var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
-    dir = path.join(tld, dir);
-    if (!fs.existsSync(dir)) {
-      log.debug('creating output directory: ' + dir);
-      fs.mkdirSync(dir);
-    }
-    process.chdir(dir);
-    // run scraper
-    var t = new Thresher(scrapers);
-    t.on('scraper.*', function(var1, var2) {
-      log.log(ep.getlevel(this.event),
-              ep.compose(this.event, var1, var2));
-    });
-    t.on('scraper.renderer.*', function(var1, var2) {
-      log.info(this.event, var1, var2)
-    });
-    t.once('result', function(result, structured) {
-      outfile = 'results.json'
-      log.debug('writing results to file:', outfile)
-      fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
-      // write out any extra formats
-      if (program.outformat) {
-        outformat.format(program.outformat, structured);
-      }
-      log.debug('changing back to top-level directory');
-      process.chdir(tld);
+done = false;
+next = 0;
 
-      // if we don't remove all the listeners, processing more URLs
-      // will post messages  to all the listeners from previous URLs
-      t.removeAllListeners();
-
-      cb();
-    });
-    t.scrape(url, program.headless);
-}
-
-// perform a rate-limited loop over the urls using
-// (algorithmically, not actually) recursive
-// setTimeOut callbacks
-var processNext = function(i, scrapers, finish,
-                           loglevel) {
-  if (i == urllist.length) {
-    finish();
-  }
-  if (i == 0) {
-    var timeleft = 0;
-  } else {
-    // rate-limit
-    var now = new Date().getTime();
-    var diff = now - lasttime;
-    var timeleft = Math.max(mintime - diff, 0);
-    log.info('waiting', Math.round(timeleft/1000),
-             'seconds before next scrape');
-  }
-  var nextUrl = urllist[i];
-  setTimeout(function() {
-    processUrl(nextUrl, scrapers, loglevel, function() {
+var checkForNext = function() {
+  var now = new Date().getTime();
+  var diff = now - lasttime;
+  var timeleft = Math.max(mintime - diff, 0);
+  if (timeleft == 0 && done) {
+    next ++;
+    if (next < urllist.length) {
       lasttime = new Date().getTime();
-      processNext(i + 1, scrapers, finish, loglevel);
-    });
-  }, timeleft + 1000);
+      processUrl(urllist[next]);
+      if (next == urllist.length - 1) {
+        finish();
+      }
+    } else {
+      finish();
+    }
+  } else if (done) {
+    if (next == urllist.length - 1) {
+      finish();
+    }
+  }
 }
 
-// start processing
-processNext(0, scrapers, finish, program.loglevel)
+// process a URL
+var processUrl = function(url) {
+  done = false;
+  log.info('processing URL:', url);
+
+  // load the scraper definition(s)
+  var scrapers = new ScraperBox(program.scraperdir);
+  if (program.scraper) {
+    scrapers.addScraper(program.scraper);
+  }
+
+  // url-specific output dir
+  var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
+  dir = path.join(tld, dir);
+  if (!fs.existsSync(dir)) {
+    log.debug('creating output directory: ' + dir);
+    fs.mkdirSync(dir);
+  }
+  process.chdir(dir);
+
+  // run scraper
+  var capturesFailed = 0;
+  var t = new Thresher(scrapers);
+
+  t.on('scraper.*', function(var1, var2) {
+    log.log(ep.getlevel(this.event),
+            ep.compose(this.event, var1, var2));
+  });
+
+  t.on('scraper.elementCaptureFailed', function() {
+    capturesFailed += 1;
+  })
+
+  t.on('scraper.renderer.*', function(var1, var2) {
+    log.info(this.event, var1, var2)
+  });
+
+  t.once('result', function(result, structured) {
+    var nresults = Object.keys(result).length
+    log.info('URL processed: captured ' + (nresults - capturesFailed) + '/' +
+             nresults + ' elements (' + capturesFailed + ' captures failed)');
+    outfile = 'results.json'
+    log.debug('writing results to file:', outfile)
+    fs.writeFileSync(outfile, JSON.stringify(structured, undefined, 2));
+    // write out any extra formats
+    if (program.outformat) {
+      outformat.format(program.outformat, structured);
+    }
+    log.debug('changing back to top-level directory');
+    process.chdir(tld);
+
+    // if we don't remove all the listeners, processing more URLs
+    // will post messages  to all the listeners from previous URLs
+    t.removeAllListeners();
+    t = null;
+
+    done = true;
+  });
+
+  t.scrape(url, program.headless);
+}
+
+setInterval(checkForNext, 100);
+processUrl(urllist[0]);
