@@ -90,7 +90,7 @@ if (program.outformat) {
 }
 
 // log options
-log.info('quickscrape launched with...');
+log.info('quickscrape ' + QSVERSION + ' launched with...');
 if (program.url) {
   log.info('- URL: ' + program.url);
 } else {
