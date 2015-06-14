@@ -8,6 +8,7 @@ var program = require('commander')
   , thresher = require('thresher')
   , Thresher = thresher.Thresher
   , ScraperBox = thresher.ScraperBox
+  , Scraper = thresher.Scraper
   , ep = require('../lib/eventparse.js')
   , loglevels = require('../lib/loglevels.js')
   , outformat = require('../lib/outformat.js');
@@ -106,6 +107,30 @@ if (program.scraperdir) {
 log.info('- Rate limit:', program.ratelimit, 'per minute');
 log.info('- Log level:', program.loglevel);
 
+// check scrapers
+if (program.scraperdir) {
+  var scrapers = new ScraperBox(program.scraperdir);
+  if (scrapers.scrapers.length == 0) {
+    log.error('the scraper directory provided did not contain any ' +
+              'valid scrapers');
+    exit(1);
+  }
+}
+if (program.scraper) {
+  var definition = fs.readFileSync(program.scraper);
+  var scraper = new Scraper(definition);
+  if (!scraper.valid) {
+    scraper.on('definitionError', function(problems) {
+      log.error('the scraper provided was not valid for the following reason(s):');
+      problems.forEach(function(p) {
+        log.error('\t- ' + p);
+      });
+      exit(1);
+    });
+    scraper.validate(definition);
+  }
+}
+
 // load list of URLs from a file
 var loadUrls = function(path) {
   var list = fs.readFileSync(path, {
@@ -174,6 +199,10 @@ var processUrl = function(url) {
   var scrapers = new ScraperBox(program.scraperdir);
   if (program.scraper) {
     scrapers.addScraper(program.scraper);
+  }
+  if (scrapers.scrapers.length == 0) {
+    log.warn('no scrapers ')
+    return;
   }
 
   // url-specific output dir
