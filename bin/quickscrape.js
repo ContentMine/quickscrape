@@ -118,7 +118,7 @@ if (program.scraperdir) {
 }
 if (program.scraper) {
   var definition = fs.readFileSync(program.scraper);
-  var scraper = new Scraper(definition);
+  var scraper = new Scraper(JSON.parse(definition));
   if (!scraper.valid) {
     scraper.on('definitionError', function(problems) {
       log.error('the scraper provided was not valid for the following reason(s):');
