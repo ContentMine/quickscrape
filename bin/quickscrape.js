@@ -31,7 +31,7 @@ program
           'where to output results ' +
           '(directory will be created if it doesn\'t exist',
           'output')
-  .option('-r, --ratelimit <int>',
+  .option('-i, --ratelimit <int>',
           'maximum number of scrapes per minute (default 3)', 3)
   .option('-h --headless',
           'render all pages in a headless browser')
