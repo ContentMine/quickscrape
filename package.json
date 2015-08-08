@@ -1,7 +1,7 @@
 {
   "name": "quickscrape",
   "description": "A command line scraping tool for the modern web",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "homepage": "https://github.com/ContentMine/quickscrape",
   "author": {
     "name": "Richard Smith-Unna",
