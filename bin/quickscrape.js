@@ -41,6 +41,8 @@ program
           'info')
   .option('-f, --outformat <name>',
           'JSON format to transform results into (currently only bibjson)')
+  .option('-f, --logfile <filename>',
+          'save log to specified file in output directory as well as printing to terminal')
   .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
@@ -66,6 +68,22 @@ log = new (winston.Logger)({
   colorize: true
 });
 winston.addColors(loglevels.colors);
+
+// create output directory
+if (!fs.existsSync(program.output)) {
+    log.debug('creating output directory: ' + program.output);
+    fs.mkdirSync(program.output);
+}
+process.chdir(program.output);
+tld = process.cwd();
+
+if (program.hasOwnProperty('logfile')) {
+  log.add(winston.transports.File, {
+    filename: program.logfile,
+    level: 'debug'
+  });
+  log.info('Saving logs to ./' + program.output + '/' + program.logfile);
+}
 
 // verify arguments
 if (program.scraper && program.scraperdir) {
@@ -152,14 +170,6 @@ var finish = function() {
   log.info('all tasks completed');
   process.exit(0);
 }
-
-// create output directory
-if (!fs.existsSync(program.output)) {
-    log.debug('creating output directory: ' + program.output);
-    fs.mkdirSync(program.output);
-}
-process.chdir(program.output);
-tld = process.cwd();
 
 // set up crude rate-limiting
 mintime = 60000 / program.ratelimit;
