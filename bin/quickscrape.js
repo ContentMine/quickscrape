@@ -136,7 +136,7 @@ if (program.scraperdir) {
 }
 if (program.scraper) {
   var definition = fs.readFileSync(program.scraper);
-  var scraper = new Scraper(JSON.parse(definition));
+  var scraper = new Scraper(JSON.parse(definition), program.headless);
   if (!scraper.valid) {
     scraper.on('definitionError', function(problems) {
       log.error('the scraper provided was not valid for the following reason(s):');
@@ -208,7 +208,7 @@ var processUrl = function(url) {
   // load the scraper definition(s)
   var scrapers = new ScraperBox(program.scraperdir);
   if (program.scraper) {
-    scrapers.addScraper(program.scraper);
+    scrapers.addScraper(program.scraper, program.headless);
   }
   if (scrapers.scrapers.length == 0) {
     log.warn('no scrapers ')
