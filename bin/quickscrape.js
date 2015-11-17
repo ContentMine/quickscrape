@@ -187,9 +187,6 @@ var checkForNext = function() {
     if (next < urllist.length) {
       lasttime = new Date().getTime();
       processUrl(urllist[next]);
-      if (next == urllist.length - 1) {
-        finish();
-      }
     } else {
       finish();
     }
