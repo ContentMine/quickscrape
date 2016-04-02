@@ -43,6 +43,8 @@ program
           'JSON format to transform results into (currently only bibjson)')
   .option('-f, --logfile <filename>',
           'save log to specified file in output directory as well as printing to terminal')
+  .option('-k, --skipexisting',
+          'skip previously processed URLs (that is, if the URL output folder exists)')
   .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
@@ -221,6 +223,21 @@ var processUrl = function(url) {
   if (!fs.existsSync(dir)) {
     log.debug('creating output directory: ' + dir);
     fs.mkdirSync(dir);
+    if (program.skipexisting) {
+        // We need to reset this to get proper rate limiting
+        // now that we have a URL we actually need to download
+        mintime = 60000 / program.ratelimit;
+    }
+  }
+  else {
+    if (program.skipexisting) {
+      log.debug('Skipping as output directory already exists');
+      done = true;
+      // No need to do rate limiting this time as we haven't
+      // downloaded anything!
+      mintime = 0;
+      return;
+    }
   }
   process.chdir(dir);
 
