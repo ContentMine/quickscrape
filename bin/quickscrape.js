@@ -220,7 +220,7 @@ var processUrl = function(url) {
   }
 
   // url-specific output dir
-  var dir = program.numberdirs ? i : url.replace(/\/+/g, '_').replace(/:/g, '');
+  var dir = program.numberdirs ? ('' + i) : url.replace(/\/+/g, '_').replace(/:/g, '');
   dir = path.join(tld, dir);
   if (!fs.existsSync(dir)) {
     log.debug('creating output directory: ' + dir);
