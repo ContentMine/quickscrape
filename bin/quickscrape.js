@@ -31,6 +31,8 @@ program
           'where to output results ' +
           '(directory will be created if it doesn\'t exist',
           'output')
+  .option('-n, --numberdirs',
+          'use a number instead of the URL to name output subdirectories')
   .option('-i, --ratelimit <int>',
           'maximum number of scrapes per minute (default 3)', 3)
   .option('-h --headless',
@@ -201,7 +203,9 @@ var checkForNext = function() {
 }
 
 // process a URL
+var i = 0
 var processUrl = function(url) {
+  i += 1
   done = false;
   log.info('processing URL:', url);
 
@@ -216,7 +220,7 @@ var processUrl = function(url) {
   }
 
   // url-specific output dir
-  var dir = url.replace(/\/+/g, '_').replace(/:/g, '');
+  var dir = program.numberdirs ? i : url.replace(/\/+/g, '_').replace(/:/g, '');
   dir = path.join(tld, dir);
   if (!fs.existsSync(dir)) {
     log.debug('creating output directory: ' + dir);
