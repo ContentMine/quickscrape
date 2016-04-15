@@ -71,6 +71,10 @@ log = new (winston.Logger)({
 });
 winston.addColors(loglevels.colors);
 
+// have to do this before changing directory
+if (program.scraper) program.scraper = path.resolve(program.scraper)
+if (program.scraperdir) program.scraperdir = path.resolve(program.scraperdir)
+
 // create output directory
 if (!fs.existsSync(program.output)) {
     log.debug('creating output directory: ' + program.output);
@@ -117,11 +121,9 @@ if (program.url) {
   log.info('- URLs from file: ' + program.urls);
 }
 if (program.scraper) {
-  program.scraper = path.resolve(program.scraper);
   log.info('- Scraper:', program.scraper);
 }
 if (program.scraperdir) {
-  program.scraperdir = path.resolve(program.scraperdir);
   log.info('- Scraperdir:', program.scraperdir);
 }
 log.info('- Rate limit:', program.ratelimit, 'per minute');
