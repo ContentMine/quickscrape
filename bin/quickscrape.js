@@ -74,7 +74,7 @@ winston.addColors(loglevels.colors);
 // have to do this before changing directory
 if (program.scraper) program.scraper = path.resolve(program.scraper)
 if (program.scraperdir) program.scraperdir = path.resolve(program.scraperdir)
-
+if (program.urllist) program.urllist = path.resolve(program.urllist)
 // create output directory
 if (!fs.existsSync(program.output)) {
     log.debug('creating output directory: ' + program.output);
@@ -268,6 +268,14 @@ var processUrl = function(url) {
 
     done = true;
   });
+
+  t.once('error', function(msg) {
+    log.error(msg + ' so moving on to next url in list')
+    process.chdir(tld)
+    t.removeAllListeners()
+    t = null
+    done = true
+  })
 
   t.scrape(url, program.headless);
 }
