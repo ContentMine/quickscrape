@@ -35,7 +35,7 @@ program
           'use a number instead of the URL to name output subdirectories')
   .option('-i, --ratelimit <int>',
           'maximum number of scrapes per minute (default 3)', 3)
-  .option('-h --headless',
+  .option('-h, --headless',
           'render all pages in a headless browser')
   .option('-l, --loglevel <level>',
           'amount of information to log ' +
