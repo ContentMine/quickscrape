@@ -11,7 +11,8 @@ var program = require('commander')
   , Scraper = thresher.Scraper
   , ep = require('../lib/eventparse.js')
   , loglevels = require('../lib/loglevels.js')
-  , outformat = require('../lib/outformat.js');
+  , outformat = require('../lib/outformat.js')
+  , sanitize = require('sanitize-filename');
 
 
 var pjson = require('../package.json');
@@ -223,7 +224,7 @@ var processUrl = function(url) {
 
   // url-specific output dir
   var dir = program.numberdirs ? ('' + i) : url.replace(/\/+/g, '_').replace(/:/g, '');
-  dir = path.join(tld, dir);
+  dir = sanitize(path.join(tld, dir));
   if (!fs.existsSync(dir)) {
     log.debug('creating output directory: ' + dir);
     fs.mkdirSync(dir);
