@@ -42,7 +42,7 @@ program
           'amount of information to log ' +
           '(silent, verbose, info*, data, warn, error, or debug)',
           'info')
-  .option('-f, --outformat <name>',
+  .option('-g, --outformat <name>',
           'JSON format to transform results into (currently only bibjson)')
   .option('-f, --logfile <filename>',
           'save log to specified file in output directory as well as printing to terminal')
@@ -86,7 +86,7 @@ tld = process.cwd();
 
 if (program.hasOwnProperty('logfile')) {
   log.add(winston.transports.File, {
-    filename: program.logfile,
+    stream: fs.createWriteStream(program.logfile.toString()),
     level: 'debug'
   });
   log.info('Saving logs to ./' + program.output + '/' + program.logfile);
