@@ -85,8 +85,9 @@ process.chdir(program.output);
 tld = process.cwd();
 
 if (program.hasOwnProperty('logfile')) {
+  var logfilestream = fs.createWriteStream(program.logfile.toString())
   log.add(winston.transports.File, {
-    stream: fs.createWriteStream(program.logfile.toString()),
+    stream: logfilestream,
     level: 'debug'
   });
   log.info('Saving logs to ./' + program.output + '/' + program.logfile);
